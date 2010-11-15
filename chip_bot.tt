@@ -1,0 +1,27 @@
+#class {chip.bot} kill
+#class {chip.bot} open
+
+/* variables */
+
+
+/* Alias */
+#alias stoploop {#untick {pulse}}
+
+/* Actions */
+
+
+/* Main (botloop) */
+
+#alias startloop {
+
+	#ticker {pulse} {
+		#showme ***PULSE***
+	} 
+	{1}
+} 
+	
+
+
+
+
+#class {chip.bot} close
