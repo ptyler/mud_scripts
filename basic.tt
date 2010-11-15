@@ -21,6 +21,24 @@
 #var {mounted} {0}
 #var {mapping} {0}
 
+/* variable captures */
+
+#act {^You have %1(%2) hit and %3(%4) movement points.}
+{
+  #var hp {%1};
+  #var maxhp {%2};
+  #var mp {%3};
+  #var maxmp {%4}
+}
+
+#act {You have scored %1 exp, and have %2(%3) steel coins.}
+{
+  #var earned_xp {%1};
+  #var coins {%2};
+  #var bankc {%3}
+}
+
+
 #action {^Alas, you cannot go that way...}
 {
   #if {$mapping==1}
