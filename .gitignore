@@ -1,0 +1,13 @@
+webrat.log
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+tmp/*
+doc/api
+doc/app
+*.swp
+*~
+logs/*log
+*.log
+.DS_Store

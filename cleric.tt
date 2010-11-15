@@ -1,0 +1,21 @@
+#class {cleric} {kill}
+#class {cleric} {open}
+
+/*
+ * aliases and such for clerics
+ ********************************************************************************/
+
+#alias {culi} {cast 'cure light'}
+#alias {cali} {cast 'cause light'}
+#alias {aid}  {cast 'aid'}
+#alias {cwater}  {cast 'create water'}
+#alias {cbless} {cast 'bless'}
+#alias {align} {cast 'know alignment'}
+#alias {lball} {cast 'light'}
+#alias {pfe} {cast 'protection from evil'}
+#alias {curse} {cast 'curse'}
+
+#act {^Your studies complete, you close %1} { synctick }
+
+
+#class {cleric} {close}

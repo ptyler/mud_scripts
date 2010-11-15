@@ -1,0 +1,25 @@
+#class {autoassist} kill
+#class {autoassist} open
+
+#var {autoassist} {1}
+
+#alias {setleader} {#var leader {%1}}
+#alias {autoassist} {#var autoassist {%1}}
+#showme {<039>You must run: setleader <leader name>}
+
+#act {^$leader {misses|bludgeons|slashes|pierces|bruise|barely|hit} %1}
+{
+  #if {$inbattle==0 && $autoassist == 1}
+  {
+    doassist
+  };
+}
+
+#alias {doassist}
+{
+  #var inbattle 1;
+  #var assisting 1;
+  assist $leader;
+}
+
+#class {autoassist} close
