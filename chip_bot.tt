@@ -1,16 +1,26 @@
 #class {chip.bot} kill
 #class {chip.bot} open
 
+/* MAIN GAME LOOP ACTIONS - Keep at top */
+
+#action {***PULSE***} {
+	#line {gag};
+	#echo {GOT A PULSE}
+}
+
+
 /* variables */
 
 
 /* Alias */
 #alias stoploop {#untick {pulse}}
 
-/* Actions */
 
 
-/* Main (botloop) */
+/* All other actions no directly related to loop */
+
+
+/* heartbeat for bot loop... main loop added as an action on ***PULSE*** */
 
 #alias startloop {
 
