@@ -51,7 +51,7 @@
  ****************************************/
 
 #alias {setfood} {#var food %0;#showme {--FOOD SET: $food}}
-#alias {setdrink} {#var drink %0;#showme {--DRINK SET: $water}}
+#alias {setdrink} {#var drink %0;#showme {--DRINK SET: $drink}}
 #alias loadpark {#path load testpath;#showme {--PARK LOADED}} 
 
 
