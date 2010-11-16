@@ -10,6 +10,7 @@
 #alias {cali} {cast 'cause light'}
 #alias {aid}  {cast 'aid'}
 #alias {cwater}  {cast 'create water'}
+#alias {cfood} {cast 'create food'}
 #alias {cbless} {cast 'bless'}
 #alias {align} {cast 'know alignment'}
 #alias {lball} {cast 'light'}
