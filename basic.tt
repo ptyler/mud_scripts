@@ -38,6 +38,13 @@
   #var bankc {%3}
 }
 
+#act {^%1H %2V %3X %5}
+{
+  #var hp {%1};
+  #var mp {%2};
+  #var earned_xp {%3};
+}
+
 
 #action {^Alas, you cannot go that way...}
 {
