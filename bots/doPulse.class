@@ -19,7 +19,6 @@
         #ticker {pulse} {
                 #showme {***PULSE***}
         }{%1};
-
         #var {botrunning} {1};
         #return
 }
@@ -37,9 +36,6 @@
         #var {botrunning} {0};
         #return
 }
-
-
-
 
 #var class_doPulse_loaded {1}
 #class {doPulse.class} close

@@ -14,31 +14,28 @@
 #act {^You are hungry.} {#var {ishungry} {1}}
 #act {^You are thirsty.} {#var {isthirsty} {1}}
 
-
  
   /* Can't find food or drink... stop the bot if it's running
    ***********************************************************/
 
 #act {^You can't seem to find it!} {
-	
 	#if {$botrunning} {
 		pstop;
 		#echo {\n-- OUT OF FOOD/WATER OR ITS NOT SET PROPERLY... ASSHOLE\n};
 		#bell /* lets get some attention!! */
 	};#else {
-		#2 {#bell} /* Just a reminder... pals */	
+		#bell /* Just a reminder... pals */	
 	}
 }
 
 #act {^You can't find it!} {
-
-        #if {$botrunning} {
-                pstop;
+	#if {$botrunning} {
+		pstop;
 		#echo {\n-- OUT OF FOOD/WATER OR ITS NOT SET PROPERLY... ASSHOLE\n};
-                #bell /* lets get some attention!! */  
-        };#else {
-                #bell /* Just a reminder... pals */
-        }
+		#bell /* lets get some attention!! */  
+	};#else {
+		#bell /* Just a reminder... pals */
+	}
 }
 
 
@@ -47,16 +44,15 @@
    **********************************************/
 
 #function doEatDrink {
-
-        #if {$ishungry} {
-                get $food $container;
-                eat $food;
-                #var ishungry {0}  /* don't worry, if we don't eat, the bot stops and will tell you */
-        };
-        #if {$isthirsty} {
-                drink $drink;
-                #var isthirsty {0}
-	 }
+	#if {$ishungry} {
+		get $food $container;
+		eat $food;
+		#var ishungry {0}  /* don't worry, if we don't eat, the bot stops and will tell you */
+	};
+	#if {$isthirsty} {
+		drink $drink;
+		#var isthirsty {0}
+	};
 }
 
 

@@ -12,7 +12,8 @@
                         };
                         #else {
                                 #echo {\n-- COULD NOT MOVE: botrunning=0}
-                        }
+                        };
+			#return
                 };
                 #case {1} {
                         #echo {\n-- CANNOT MOVE: EXITING};
@@ -23,7 +24,6 @@
                         #return
                 }
         }
-
 }
 
 
