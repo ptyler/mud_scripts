@@ -2,8 +2,8 @@
 #class {chip.bot} open
 
 /* ***************************************************************************
- *  MAIN GAME LOOP ACTIONS - Keep at top 
-  *****************************************************************************/
+ *    MAIN GAME LOOP ACTIONS - Keep at top 
+ *****************************************************************************/
 
 #action {***PULSE***} {
 	#line {gag};
@@ -22,7 +22,7 @@
 #variable couldwalk {0}
 #variable ishungry {0}
 #variable isthirsty {0}
-
+#variable sleeping {0}
 
 /*
  * minor variables
