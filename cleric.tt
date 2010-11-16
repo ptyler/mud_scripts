@@ -6,6 +6,7 @@
  ********************************************************************************/
 
 #alias {culi} {cast 'cure light'}
+#alias {cuse} {cast 'cure serious'}
 #alias {cali} {cast 'cause light'}
 #alias {aid}  {cast 'aid'}
 #alias {cwater}  {cast 'create water'}
