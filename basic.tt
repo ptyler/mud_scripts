@@ -114,7 +114,7 @@
 
 #alias {basic_help}
 {
-  #showme {<039>You must run: setfood <food name>}
+  #showme {<039>You must run: setfood <food name>};
   #showme {<039>You must run: setbag  <container type>}
 }
 
