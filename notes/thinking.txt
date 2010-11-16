@@ -1,0 +1,75 @@
+
+This bot/automation requires different thinking than traditional programming.  
+There is no 'main' function to be created and used, tintin++ itself is that 
+main loop and is very much detached from the MUD.  It's so easy to get this
+notion confused.  Lord knows I do at least once a day, that's why I'm writing this.
+
+The client tries its best to stay in sync with the mud, but due to lag, MUD delay 
+or mud temporarily hanging this isn't always possible.  Tintin++ blindly does as 
+you tell it to -- great!  But that has consequences! This only means that if you 
+trigger an action, own that action, track it and don't send another until that action 
+completes.  The great thing here is that tintin++ is  of the same mind to do what it's 
+told when a burst of text flys out of the lagged/hung MUD. That means you can easily 
+ignore bursts of spells wearing off,  the need to stand up, the conditions to perform 
+special attacks, etc.  
+
+Let's look at an example:
+
+The MUD sends:
+
+You slash a loboleti with your finger nail.
+
+You want to perform your special attack called breakdance, so you set up a trigger:
+
+#act {^You slash %1} {breakdance}
+
+This would work fine as long as there is no delay between tintin++ the MUD.  If
+there was any lag and the MUD server messages weren't yet delivered and then 
+finally you seen:
+
+
+You slash a loboleti with your finger nail.
+You slash a loboleti with your finger nail.
+You slash a loboleti with your finger nail.
+
+
+You'd have just sent 3 breakdance commands to the MUD, effectively blocking any
+further input from the client until those have been executed.  What's worse is
+that any other triggers you have for casting, other attacks, etc.  They too will
+be queuing up commands.  A solution could be:
+
+#var breaking {0}
+
+#alias {dobreakdance}
+{
+  #if { $breaking != 1 }
+  {
+    #var breaking 1;
+    break
+  }
+}
+
+#act {^You breakdance and frighten %1} 
+{
+  #var breaking 0
+}
+
+Also note that if the mob dies before you can perform the last breakdance, due
+to lag.  The it would also be needed in the action for the mob's death message
+in order to reset it.
+
+Another idea could be to have a general clearing alias to unset variables that
+con't be in a state of true.
+
+#alias {clearstates}
+{
+  #if { $breaking && inbattle != 1 }  
+  {
+    #var breaking 0
+  }
+}
+
+The important thing to remember is that the client and the server do not work
+with one another to stay in sync, that is our job. 
+
+
