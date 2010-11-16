@@ -63,6 +63,13 @@
   }
 }
 
+#alias {roomname} {#map name %1}
+#alias {roomsym}  {#map set roomsymbol %1}
+#alias {mblue}    {#map set roomcolor <049>}
+#alias {myellow}  {#map set roomcolor <039>}
+#alias {mgreen}   {#map set roomcolor <029>}
+#alias {mpurp}    {#map set roomcolor <059>}
+
 #alias {mapoff}
 {
   #if {$mapping==1}
@@ -83,7 +90,7 @@
 }
 
 #alias {setfood}  {#var food {%1}}
-#alias {setcont}  {#var container {%1}}
+#alias {setbag}   {#var container {%1}}
 #alias {rl}       {#read basic.tt}
 #alias {autoloot} {#var autoloot {%1}; #showme {autoloot set to: %1}}
 #alias {synctick}
@@ -105,9 +112,14 @@
 #class {basic} {close}
 
 
+#alias {basic_help}
+{
+  #showme {<039>You must run: setfood <food name>}
+  #showme {<039>You must run: setbag  <container type>}
+}
 
 
-
+basic_help
 
 
 
