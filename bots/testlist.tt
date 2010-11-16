@@ -1,41 +1,54 @@
 #var hitlist {}
 #var couldkill {0}
 #var assistant {0}
+
 #var name {}
 
-#action {^A furry brown gopher is digging up a hole in the ground here.} {#list hitlist add {gopher};#var couldkill 1}
-#action {^A white pigeon is here pecking at some crumbs of bread.} {#list hitlist add {pigeon};#var couldkill 1}
-#action {^A colorful butterfly flutters around in the wind.} {#list hitlist add {butterfly};#var couldkill 1}
-#action {^A cute little kitten plays clumsily here.} {#list hitlist add {kitten};#var couldkill 1}
-#action {^A large brown dog is wandering around with his tongue hanging out.} {#list hitlist add {dog};#var couldkill 1}
-#action {^A small robin hops around in the bushes.} {#list hitlist add {robin};#var couldkill 1}
-#action {^A little white mouse scurries along the path.} {#list hitlist add {mouse};#var couldkill 1}
-#action {^A cute black duckling pecks at some bread crumbs on the ground.} {#list hitlist add {black};#var couldkill 1}
-#action {^A cute white duckling pecks at some bread crumbs on the ground.} {#list hitlist add {white};#var couldkill 1}
-#action {^A white duck waddles around while she waits to be fed.} {#list hitlist add {duck};#var couldkill 1}
-#action {^A park guard patrols the area, trying to maintain peace and order.} {#list hitlist add {guard};#var couldkill 1}
-#action {^An old man sits here by the fountain feeding the ducks.} {#list hitlist add {old};#var couldkill 1}
-#action {^A park janitor walks around picking up trash.} {#list hitlist add {janitor};#var couldkill 1}
-#action {^An adorable pet cat leaps to and fro trying to capture a squirrel.} {#list hitlist add {squirrel};#var couldkill 1}
-#action {^A tall gardener is here sculpting something from the bushes.} {#list hitlist add {gardener};#var couldkill 1}
-#action {^A white bunny hops around in the grassy field.} {#list hitlist add {bunny};#var couldkill 1}
-#action {^A small little chipmunk hides in the bushes as it peeks out at you.} {#list hitlist add {chipmunk};#var couldkill 1}
-#action {^A young couple walks along the path, hand in hand.} {#list hitlist add {couple};#var couldkill 1}
-#action {^A little boy is rolling around in the grass here.} {#list hitlist add {boy};#var couldkill 1}
-#action {^A young deer with a fluffy white tail bounds its way around the park.} {#list hitlist add {deer};#var couldkill 1}
-#action {^An old man is here maintaining the park's plants.} {#list hitlist add {old};#var couldkill 1}
+#action {^A furry brown gopher is digging up a hole in the ground here.} {hladd gopher;cankill}
+#action {^A white pigeon is here pecking at some crumbs of bread.} {hladd pigeon;cankill}
+#action {^A colorful butterfly flutters around in the wind.} {hladd butterfly;cankill}
+#action {^A cute little kitten plays clumsily here.} {hladd kitten;cankill}
+#action {^A large brown dog is wandering around with his tongue hanging out.} {hladd dog;cankill}
+#action {^A small robin hops around in the bushes.} {hladd robin;cankill}
+#action {^A little white mouse scurries along the path.} {hladd mouse;cankill}
+#action {^A cute black duckling pecks at some bread crumbs on the ground.} {hladd black.duckling;cankill}
+#action {^A cute white duckling pecks at some bread crumbs on the ground.} {hladd white.duckling;cankill}
+#action {^A white duck waddles around while she waits to be fed.} {hladd duck;cankill}
+#action {^A park guard patrols the area, trying to maintain peace and order.} {hladd guard;asser}
+#action {^An old man sits here by the fountain feeding the ducks.} {hladd old.man;cankill}
+#action {^A park janitor walks around picking up trash.} {hladd janitor;cankill}
+#action {^An adorable pet cat leaps to and fro trying to capture a squirrel.} {hladd cat;cankill}
+#action {^A tall gardener is here sculpting something from the bushes.} {hladd gardener;cankill}
+#action {^A white bunny hops around in the grassy field.} {hladd bunny;cankill}
+#action {^A small little chipmunk hides in the bushes as it peeks out at you.} {hladd chipmunk;cankill}
+#action {^A young couple walks along the path, hand in hand.} {hladd couple;cankill}
+#action {^A little boy is rolling around in the grass here.} {hladd boy;cankill}
+#action {^A young deer with a fluffy white tail bounds its way around the park.} {hladd deer;cankill}
+#action {^An old man is here maintaining the park's plants.} {hladd old.man;cankill}
 
 
 #action {***KILLPULSE***} {
 	#if {$couldkill} {
-		#foreach {$hitlist[%*]} {name} {
-			#showme {Could kill: $name}
-		};
-		#list {hitlist} {clear}
-	} {
-	#showme {*** list empty or can't fight\n}
-	}
+		#foreach {$hitlist[%*]} {name} {#showme {Could kill: $name};
+		#list {hitlist} {clear}}
+	}; 
+	#if {$assistant} {
+		#showme {*** But won't be killing, because of assistant};
+		#var assistant 0;
+	};
 }
 
 
 #alias fpulse {#showme {***KILLPULSE***}}
+
+#alias hladd {#list hitlist add %0}
+#alias cankill {#var couldkill 1} 
+#alias asser {#var assistant 1}
+#alias cleanlist {#list hitlist clear}
+
+#alias {n} {cleanlist;north}
+#alias {e} {cleanlist;east}
+#alias {s} {cleanlist;south}
+#alias {w} {cleanlist;west}
+#alias {u} {cleanlist;up}
+#alias {d} {cleanlist;down}
