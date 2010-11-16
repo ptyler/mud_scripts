@@ -1,0 +1,36 @@
+#class {promptbar} kill
+#class {promptbar} open
+
+#function {colscale}
+{
+  #switch {10 * %1 / %2}
+  {
+    #case {10} {#return <020>};
+    #case {9}  {#return <020>};
+    #case {8}  {#return <020>};
+    #case {7}  {#return <030>};
+    #case {6}  {#return <030>};
+    #case {5}  {#return <030>};
+    #case {4}  {#return <030>};
+    #case {3}  {#return <010>};
+    #case {2}  {#return <010>};
+    #case {1}  {#return <010>};
+    #case {0}  {#return <010>};
+    #default         {#return <020>}
+  }
+}
+
+#act {^%1H %2V %3X %4C Exits:%5>}
+{
+  #var hpcol @colscale{%1;$maxhp};
+  #var mpcol @colscale{%2;$maxmp};
+
+  #format {p1} {%s%+4s<070>/<020>%s<090>:hp<090>} {$hpcol} {%1} {$maxhp};
+  #format {p2} {%s%+4s<070>/<020>%s<090>:mp<070>} {$mpcol} {%2} {$maxmp};
+  #format {p3} {<020>%s<090>:xp needed <020>Exits:<090>%s<099>} {%3} {%5};
+
+}
+
+#prompt {^%1H %2V %3X %4C Exits:%5>} {$p1 $p2 $p3}
+
+#class {promptbar} close
