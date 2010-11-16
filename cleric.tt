@@ -16,6 +16,7 @@
 #alias {lball} {cast 'light'}
 #alias {pfe} {cast 'protection from evil'}
 #alias {curse} {cast 'curse'}
+#alias {rstr} {cast 'restore strength'}
 
 #act {^Your studies complete, you close %1} { synctick }
 
