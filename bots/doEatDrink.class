@@ -33,7 +33,7 @@
 #act {^You can't find it!} {
 
         #if {$botrunning} {
-                stop;
+                pstop;
 		#echo {\n-- OUT OF FOOD/WATER OR ITS NOT SET PROPERLY... ASSHOLE\n};
                 #bell /* lets get some attention!! */  
         };#else {
