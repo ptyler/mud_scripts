@@ -6,14 +6,17 @@
  ********************************************************************************/
 
 #alias {culi} {cast 'cure light'}
+#alias {cuse} {cast 'cure serious'}
 #alias {cali} {cast 'cause light'}
 #alias {aid}  {cast 'aid'}
 #alias {cwater}  {cast 'create water'}
+#alias {cfood} {cast 'create food'}
 #alias {cbless} {cast 'bless'}
 #alias {align} {cast 'know alignment'}
 #alias {lball} {cast 'light'}
 #alias {pfe} {cast 'protection from evil'}
 #alias {curse} {cast 'curse'}
+#alias {rstr} {cast 'restore strength'}
 
 #act {^Your studies complete, you close %1} { synctick }
 
