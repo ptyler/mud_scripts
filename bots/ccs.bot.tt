@@ -1,0 +1,130 @@
+#class {ccs.bot} kill
+#class {ccs.bot} open
+
+
+ /* Important shit - class load checks etc.
+  *****************************************************************************/
+
+#var class_doMove_loaded {0}
+#var class_doEatDrink_loaded {0}
+#var class_doPulse_loaded {0}
+
+
+#action {***PULSE***} {
+	#line {gag};
+
+	#if {$class_doMove_loaded} {@doMove{}};
+	#if {$class_doEatDrink_loaded} {@doEatDrink{}}
+}
+
+
+ 
+ /* Major variables - state/check related
+  ****************************************/
+
+#variable isfight {0}
+#variable isrest  {0}
+#variable issit {0}
+#variable issleep {0}
+#variable ishungry {0}
+#variable isthirsty {0}
+
+
+ /* Minor variables - maybe dupes in classes
+  ********************************************/
+
+#variable container {grocerybag}
+#variable food {ham}
+#variable drink {water}
+
+
+#var {testpath} {s;s;s;n;n;n}
+
+
+
+
+ /* Major alias' start/stop bot and load shit etc.
+  **************************************************/
+
+
+#alias {pstart} {
+	#if {$class_doPulse_loaded} {
+		@doPulse{3}
+	};#else {
+		#bell;
+		#echo {\n-- START WHAT??? LOAD IT FIRST\n}
+	}
+}
+
+#alias {pstop} {
+	#if {$botrunning} {
+		@doStopPulse{}
+	};#else {
+		#bell;
+		#echo {\n-- PULSE NOT RUNNING: nothing to stop\n}	
+	}
+}
+
+
+#alias {load.doMove} {#class {doMove.class} {read} {doMove.class};#class}
+#alias {load.doPulse} {#class {doPulse.class} {read} {doPulse.class};#class}
+#alias {load.doEatDrink} {#class {doEatDrink.class} {read} {doEatDrink.class};#class}
+
+
+ /*  minor alias'
+  ****************************************/
+
+#alias {setfood} {#var food %0;#showme {--FOOD SET: $food}}
+#alias {setdrink} {#var drink %0;#showme {--DRINK SET: $drink}}
+
+
+ 
+ /*  test related shit
+  ****************************************/
+
+#action {^#END OF PATH} {loadtestp}
+#alias loadtestp {#path load testpath;#echo {--PARK LOADED}}
+
+
+
+
+
+
+
+  /* help down here
+   ****************************/
+
+#alias ccshelp {
+
+	#echo   { ----------------------------------------------------------------- };
+	#echo   {|                         Chip and Chap                           |};
+	#echo   {|                     SCRIPT HELPY FUCK HELP                      |};
+	#echo   {|                                                                 |};
+	#echo   {| Current commands:                                               |};
+	#echo   {|                                                                 |};
+	#echo   {|   - ccshelp                      (      THIS? FUCKER         )  |};
+	#echo   {|   - loadtestp                    ( loads a shitty test path  )  |};
+	#echo   {|   - setfood <food>               (  guess what that does     )  |};
+	#echo   {|   - setdrink <drink>             (          huh!?            )  |};
+	#echo   {|                                                                 |};
+	#echo   {|   - load.doPulse                 (     load the pulse        )  |};
+	#echo   {|   - load.doMove                  (      load pathing         )  |};
+	#echo   {|   - load.doEatDrink              (  load auto eat/drink shit )  |};
+	#echo   {|                                                                 |};
+	#echo   {|   - pstart                       (     start the pulse       )  |};
+	#echo   {|   - pstop                        (      stop the pulse       )  |};
+	#echo   {|                                                                 |};
+	#echo   {|                                                                 |};
+	#echo   {|                                                                 |};
+	#echo   {|                                                                 |};
+	#echo   {|                                                                 |};
+	#echo   {|                                                                 |};
+	#echo   {|                                                                 |};
+	#echo   {|                                                                 |};
+	#echo   {|                                                                 |};
+	#echo   {|                                                                 |};
+	#echo   { -----------------------------------------------------------------}
+
+}
+
+#class {ccs.bot} close
