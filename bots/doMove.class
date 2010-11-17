@@ -1,0 +1,31 @@
+#class {doMove.class} kill
+#class {doMove.class} open
+
+
+#function doMove {
+
+        #switch {($isfight | $isrest | $issit | $issleep)} {
+                #case {0} {
+                        #echo {\n-- CAN MOVE: TRYING};
+                        #if {$botrunning} {
+                                #path walk forward;
+                        };
+                        #else {
+                                #echo {\n-- COULD NOT MOVE: botrunning=0}
+                        };
+			#return
+                };
+                #case {1} {
+                        #echo {\n-- CANNOT MOVE: EXITING};
+                        #echo {\n-- Variables set -  Fighting: $isfight Rest: $isrest Sit: $issit Sleep: $issleep};
+                        #return
+                };
+                #default {
+                        #return
+                }
+        }
+}
+
+
+#var class_doMove_loaded {1}
+#class {doMove.class} close

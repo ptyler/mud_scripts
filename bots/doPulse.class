@@ -1,0 +1,41 @@
+#class {doPulse.class} kill
+#class {doPulse.class} open
+
+
+#var botrunning {0}  /* check var for running/stopped pulse */
+
+
+
+/*
+ *  doPulse function
+ *
+ *  This starts the pulse, args are delay in seconds:  @startloop{pulse_delay}
+ *
+ ************************************************************************************/
+
+
+#function doPulse {
+
+        #ticker {pulse} {
+                #showme {***PULSE***}
+        }{%1};
+        #var {botrunning} {1};
+        #return
+}
+
+
+
+/*
+ * doStopPulse function: stop the pulse, no args: @stoploop{}
+ *
+ ************************************************************************************/
+
+#function doStopPulse {
+
+        #untick {pulse};
+        #var {botrunning} {0};
+        #return
+}
+
+#var class_doPulse_loaded {1}
+#class {doPulse.class} close

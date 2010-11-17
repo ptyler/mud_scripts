@@ -1,0 +1,60 @@
+#class {doEatDrink.class} kill
+#class {doEatDrink.class} open
+
+ 
+  /* General variabless and actions related to doEatDrink (some default)
+   ***********************************************************************/
+
+#var isthirsty {0}
+#var ishungry {0}
+#var food {ham}
+#var drink {water} /*no shit... but maybe there is other stuff to drink*/
+
+
+#act {^You are hungry.} {#var {ishungry} {1}}
+#act {^You are thirsty.} {#var {isthirsty} {1}}
+
+ 
+  /* Can't find food or drink... stop the bot if it's running
+   ***********************************************************/
+
+#act {^You can't seem to find it!} {
+	#if {$botrunning} {
+		pstop;
+		#echo {\n-- OUT OF FOOD/WATER OR ITS NOT SET PROPERLY... ASSHOLE\n};
+		#bell /* lets get some attention!! */
+	};#else {
+		#bell /* Just a reminder... pals */	
+	}
+}
+
+#act {^You can't find it!} {
+	#if {$botrunning} {
+		pstop;
+		#echo {\n-- OUT OF FOOD/WATER OR ITS NOT SET PROPERLY... ASSHOLE\n};
+		#bell /* lets get some attention!! */  
+	};#else {
+		#bell /* Just a reminder... pals */
+	}
+}
+
+
+
+  /* doEatDrink function - no args atm
+   **********************************************/
+
+#function doEatDrink {
+	#if {$ishungry} {
+		get $food $container;
+		eat $food;
+		#var ishungry {0}  /* don't worry, if we don't eat, the bot stops and will tell you */
+	};
+	#if {$isthirsty} {
+		drink $drink;
+		#var isthirsty {0}
+	};
+}
+
+
+#var class_doEatDrink_loaded {1}
+#class {doEatDrink.class} close
