@@ -20,5 +20,35 @@
 
 #act {^Your studies complete, you close %1} { synctick }
 
+#var {needbless} {0}
+
+
+/*
+ * handle successful bless as an #action, rather than auto set it in the alias 
+ * because casting it, doesn't mean it was successful, only receiving this message
+ * means that.
+ ********************************************************************************/
+
+#act {^%1H %2V %3X %4C Mem:%5 Exits:%6}
+{
+  #var memming 1
+}
+  
+
+#act {^You feel less righteous} {#var needbless 1}
+#act {^You feel righteous.} {#var needbless 0}
+
+#alias {do_buffs}
+{
+  #if { $needbless && !$inbattle && !$mounted && !$resting }
+  {
+    cbless me
+  }
+}
+
+#tick {cleric}
+{
+  do_buffs;
+} {60}
 
 #class {cleric} {close}
