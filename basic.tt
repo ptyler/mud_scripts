@@ -45,6 +45,14 @@
   #var earned_xp {%3};
 }
 
+#act {^You {miss|bludgeon|slash|pierce|bruise|barely|hit} %1}
+{
+  #if {$inbattle==0}
+  {
+    #var inbattle 1
+  }
+}
+
 
 #action {^Alas, you cannot go that way...}
 {
@@ -58,7 +66,14 @@
 #act {^You are thirsty.} { drink water }
 #act {^There were %1 coins.} { split %1 }
 #act {^You now ride a %1} {#var mounted {1}}
+#act {^You swing into the saddle of this great steed.} {#var mounted 1}
+#act {^You throw a leg over the beast, and slide off its side.} {#var mounted 0}
 #act {^You no longer ride %1} {#var mounted {0}}
+#act {^You stand up.} 
+{
+  #var resting 0;
+  #var sitting 0;
+}
 
 #act {^%1 is dead! R.I.P.}
 {
