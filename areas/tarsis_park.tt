@@ -1,10 +1,5 @@
-#class {walkabout} kill
-#class {walkabout} open
-
-#alias {mn} {#map set roomcolor <059>; n}
-#alias {me} {#map set roomcolor <059>; e}
-#alias {mw} {#map set roomcolor <059>; w}
-#alias {ms} {#map set roomcolor <059>; s}
+#class {tarsis_park} kill
+#class {tarsis_park} open
 
 #var {tarsis_park} {s;e;s;e;w;s;e;e;n;s;s;w;e;s;e;n;s;w;s;s;e;w;n;w;s;w;s;e;s;e;w;s;w;s;n;n;w;s;n;n;n;w;s;s;n;n;w;s;n;e;n;e;n;e;w;n;w;w;s;s;n;w;n;w;n;e;n;e;s;e;n;s;w;n;w;n;e;w;w;n;w;e;s;w;s;e;w;s;e;s;e;s;w;s;e;s;e;w;s;e;s;n;w;n;n;w;n;w;w}
 
@@ -12,4 +7,4 @@
 
 #variable {tarsis_park2} {e;s;e;w;s;e;e;n;s;s;w;e;s;e;n;s;w;s;s;e;w;n;w;s;w;s;e;s;e;w;s;w;s;e;w;n;w;n;e;n;w;n;w;s;s;n;n;w;s;w;s;n;w;n;e;w;n;w;s;n;n;e;n;w;n;w;n;n;e;e;s;e;s;e;n;n}
 
-#class {walkabout} close
+#class {tarsis_park} close
