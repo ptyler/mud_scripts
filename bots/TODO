@@ -1,0 +1,175 @@
+
+
+
+************************************************************
+* TODO Shit... stuff to actually do, ideas below TODO list *
+************************************************************
+
+
+
+
+-------------
+General shit:
+-------------
+
+-- TODO:
+--------
+
+- Put all this shit together to get a bot that is actually working at the
+  basic level, based on what is  already coded.
+
+- Cleanup logic
+
+- Cleanup unused vars and actions
+
+- Find stupid fuckin spaces that are outputting carrige returns every 
+  pulse... think doEatDrink.class is the culprit
+
+
+-- IDEAS:
+---------
+
+- Lots and lots... 
+
+
+
+
+-----------
+ccs.bot.tt:
+-----------
+
+-- TODO:
+--------
+
+- Figure out the best way to generalize this so that other shit can be loaded
+  for regular play scripts, etc.
+
+- Pull out all actions/vars/triggers that could go in individual *.class scripts
+
+
+
+-- IDEAS:
+---------
+
+
+
+
+
+--------------
+doPulse.class:
+--------------
+
+-- TODO:
+--------
+
+- Clean up unused shit
+
+- Clean up code itself to eliminate any extra shit being sent to the mud
+ 
+
+
+-- IDEAS:
+---------
+
+
+
+
+
+
+-------------
+doMove.class:
+-------------
+
+-- TODO:
+--------
+
+- Associate doCombat in here... so that the violence pulse is based on the
+  walk pulse, ( ie. walk first, check health, then check room for a fight? )
+
+- Add logic for various states, resting, sitting etc.
+
+- Determine best way to setup state variables, (rest, sit, sleep, etc.)
+
+
+-- IDEAS:
+---------
+
+
+- Lots more can be added here, based on ideas one might have for stuff
+
+- Map integration for pathing instead of static routes from "#path walk"
+
+
+
+
+
+-----------------
+doEatDrink.class:
+-----------------
+
+-- TODO:
+--------
+
+- Think this is pretty much roughed out for now
+
+- Clean up unused shit
+
+- Find what is sending unused output to the mud, double/triple prompt bug (thats my name for it)
+
+
+
+-- IDEAS:
+---------
+
+- Can add logic for out of food, out of drink
+
+	- Stop the bot? ring bells? scream for human intervention?
+
+- Better logic for containers
+
+
+
+
+---------------
+doCombat.class:
+---------------
+
+-- TODO:
+--------
+
+- FUCK... this needs cleaned, and made operational at a very basic level
+
+	- Scan room, build a list of mobs,HP
+	- Pick a mob, kill it.
+	- Integrate into main bot so that we have a working version
+
+
+-- IDEAS:
+---------
+
+- Figure out mob types (Normal, Assistee, Agressive, Assistant)
+
+	- Can use these types to determine course of action in a room
+
+		- Don't attack based on Assistant being in same room as assistee
+		- If it's a normal mob, just kill it
+		- If there is assister/assistee in the same room, but you  are currently a badass with enough HP to kill both... then do it
+		- Possibly interegrate "scan" to see what is going to be in the next room, and avoid "agressive" mobs 
+			- or at least count how many there are to determine if you can fuck them all up or not before you wander in
+		- Etc.
+
+- Build lists of mobs with arrays, that can be saved to an output file, for later reading back in
+
+	- replace action triggers with these types of lists
+
+- Have varying combat modes
+
+	- Cautious: Avoid agressive/assistants
+	- Killer: Fuck em all, you can clear this zone
+	- Normal: Kill based on HP min, and avoid assistants
+	- Hitman: Target specific mobs only (coin/item runs, with this type)
+
+ 
+
+
+

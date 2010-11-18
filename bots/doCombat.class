@@ -1,0 +1,135 @@
+#class {doCombat.class} {kill}
+#class {doCombat.class} {open}
+
+#var isfight {0}
+#var chkCombat {}
+
+#var hitlist {}
+
+#var hpasser {}
+#var asslist {}
+
+#var countl {0}
+#var couldkill {0}
+#var assistant {0}
+
+#var name {}
+
+#action {^A furry brown gopher is digging up a hole in the ground here.} {@addMobInfo{gopher;30;n};cankill}
+#action {^A white pigeon is here pecking at some crumbs of bread.} {@addMobInfo{pigeon;30;n};cankill}
+#action {^A colorful butterfly flutters around in the wind.} {@addMobInfo{butterfly;20;n};cankill}
+#action {^A cute little kitten plays clumsily here.} {@addMobInfo{kitten;12;n};cankill}
+#action {^A large brown dog is wandering around with his tongue hanging out.} {@addMobInfo{dog;25;n};cankill}
+#action {^A small robin hops around in the bushes.} {@addMobInfo{robin;25;n};cankill}
+#action {^A little white mouse scurries along the path.} {@addMobInfo{mouse;10;n};cankill}
+#action {^A cute black duckling pecks at some bread crumbs on the ground.} {@addMobInfo{black.duckling;20;n};cankill}
+#action {^A cute white duckling pecks at some bread crumbs on the ground.} {@addMobInfo{white.duckling;18;n};cankill}
+#action {^A white duck waddles around while she waits to be fed.} {@addMobInfo{duck;25;n};cankill}
+
+#action {^A park guard patrols the area, trying to maintain peace and order.} {dkadd guard;hpass 200;asser}
+#action {^An old man sits here by the fountain feeding the ducks.} {dkadd old.man;hpass 102;asser}
+
+#action {^A park janitor walks around picking up trash.} {@addMobInfo{janitor;101;n};cankill}
+#action {^An adorable pet cat leaps to and fro trying to capture a squirrel.} {@addMobInfo{cat;23;n};cankill}
+#action {^A tall gardener is here sculpting something from the bushes.} {hladd gardener;hpadd 110;cankill}
+#action {^A white bunny hops around in the grassy field.} {hladd bunny;hpadd 10;cankill}
+#action {^A small little chipmunk hides in the bushes as it peeks out at you.} {hladd chipmunk;hpadd 20;cankill}
+#action {^A young couple walks along the path, hand in hand.} {hladd couple;hpadd 120;cankill}
+#action {^A little boy is rolling around in the grass here.} {hladd boy;hpadd 104;cankill}
+#action {^A young deer with a fluffy white tail bounds its way around the park.} {hladd deer;hpadd 45;cankill}
+#action {^An old man is here maintaining the park's plants.} {hladd old.man;hpadd 122;cankill}
+
+
+#action {***KILLPULSE***} {
+	#if {$couldkill} {
+		#loop {1} {&hitlist[]} {countl} {#echo {Could kill: $hitlist[$countl] : need $hplist[$countl] HP}};
+		#list {hitlist} {clear};
+		#list {hplist} {clear};
+		#var {couldkill} {0}
+	}; 
+	#if {$assistant} {
+		#if {&asslist[] > 1} {
+			#showme {-- MULTIPLE ASSISTANTS FOUND:};
+			#loop {1} {&asslist[]} {countl} {#echo {$countl ) $asslist[$countl] : need $hpasser[$countl] HP}};
+			#list {asslist} {clear};
+			#list {hpasser} {clear};
+			#var assistant 0
+		} {
+		  	#showme {-- ASSISTANT FOUND};
+			#showme {$asslist[1] : need $hpasser[1] HP};
+			#list {asslist} {clear};
+			#list {hpasser} {clear}
+			#var assistant 0
+		}
+	}
+	
+
+}
+
+
+/* This takes a list */
+
+#function {gettarget} {
+	
+
+	#showme {-- CURRENT HP IS: $currenthp};
+	#showme {-- CURRENT HITLIST: $hitlist};
+	#showme {\n-- CHECKING TARGETS:};
+
+	#loop {1} {&hplist[]} {gt_count} {
+		#if {$currenthp < $hplist[$gt_count]} {
+			#echo {-- REMOVING: $hitlist[$gt_count]    HP REQUIRED WAS: $hplist[$gt_count] \n};
+			#list {hplist} {delete} {$gt_count};
+			#list {hitlist} {delete} {$gt_count};
+			#echo {-- NEW LIST: $hitlist}	
+		};
+	} 
+	
+	#echo {\n-- GETTING RANDOM TARGET FROM REMAINING};
+	#list {hitlist} {size} {size_list};
+	#math {gt_index} {1 d $size_list};
+	#echo {-- Random Target Selected: $hitlist[$gt_index]  HP REQUIRED: $hplist[$gt_index]}; 
+	#var gottarget {$hitlist[$gt_index]};
+	#showme {HAVE TARGET: $gottarget}
+}
+
+#function {addMobInfo} {
+	
+	#echo {List: $hitlist\n};
+	#echo {-- CORRELATING MOB INFORMATION:\nTarget Name: %1\nMin HP req: %2\nType: %3\n--------------};
+
+	#if {&hitlist[]} {
+		#list {hitlist[(&hitlist[] + 1)]} {add} {%1} {%2} {%3} 
+	};#else {
+		#list {hitlist[1]} {add} {%1} {%2} {%3}
+	}
+}
+
+#alias fuckshitup {#var killwhat @gettarget{};kill $killwhat}
+
+
+#alias fpulse {#showme {***KILLPULSE***}}
+
+#alias hladd {#list hitlist add %0}
+#alias dkadd {#list asslist add %0}
+#alias hpadd {#list hplist add %0}
+#alias hpass {#list hpasser add %0}
+#alias cankill {#var couldkill 1} 
+#alias asser {#var assistant 1}
+#alias cleanlist {#list {hitlist} {clear};#list {hplist} {clear}}
+
+#alias testlist {@addMobInfo{%1;%2;%3};#showme {$hitlist}}
+
+#alias {n} {cleanlist;north}
+#alias {e} {cleanlist;east}
+#alias {s} {cleanlist;south}
+#alias {w} {cleanlist;west}
+#alias {u} {cleanlist;up}
+#alias {d} {cleanlist;down}
+#alias {l} {cleanlist;look}
+
+#action {^%1H} {#var {currenthp} {%1}}
+
+
+#var class_doCombat_loaded {1}
+#class {doCombat.class} {close}
