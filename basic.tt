@@ -137,26 +137,27 @@
 #alias {load.mapping}   {#read mapping.tt}
 #alias {load.cleric}    {#read guilds/cleric.tt}
 
-#alias {basic_help}
+#alias {basic.help}
 {
-  #showme {,--------------------------------------,};
-  #showme {|<039> Chip & Chap Basic MUD Module         |}
-  #showme {'--------------------------------------'};
-  #showme {,-------------------------------------------,};
-  #showme {|<039> You set the following:               |};
-  #showme {|<039>   setbag  <bag name>                 |}
-  #showme {|<039>   setfood <food name>                |}
-  #showme {|                                           |}
-  #showme {|<039> Optionally:                          |}
-  #showme {|<039>    load.mapping                      |}
-  #showme {|<039>    load.{cleric|scout|...etc}        |}
-  #showme {'--------------------------------------'};
+  #showme {<039>,--------------------------------------,};
+  #showme {<039>| Chip & Chap Basic MUD Module         |};
+  #showme {<039>'--------------------------------------'};
+  #showme {<039>,--------------------------------------,};
+  #showme {<039>| You set the following:               |};
+  #showme {<039>|   setbag  <bag name>                 |};
+  #showme {<039>|   setfood <food name>                |};
+  #showme {<039>|                                      |};
+  #showme {<039>| Optionally:                          |};
+  #showme {<039>|    basic.help                        |};
+  #showme {<039>|    load.mapping                      |};
+  #showme {<039>|    load.{cleric|scout|...etc}        |};
+  #showme {<039>'--------------------------------------'<099>};
 }
 
 
 /* need at least 1 score output to populate variables */
 score
-#delay 1 basic_help
+#delay 1 basic.help
 
 #class {basic} {close}
 
