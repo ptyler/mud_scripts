@@ -108,10 +108,16 @@
   exa corpse;
   #if {$autoloot == 1}
   {
-    get all corpse
+    get all.coins corpse;
   }
 }
 
+/*
+ * These trigger synctick to help, at least a little, to stay in sync with the
+ * MUD's internal tick.  These should be class independent triggers.
+ *****************************************************************************/
+
+#act {^There is lightning in the sky.} {synctick}
 
 #alias {synctick}
 {
