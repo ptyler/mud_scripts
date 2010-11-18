@@ -1,0 +1,85 @@
+#class {mapping} {kill}
+#class {mapping} {open}
+
+/*
+ * simplify mapping just a wee bit
+ ******************************************************************************/
+
+#var {mapping} {0}
+
+#action {^Alas, you cannot go that way...}
+{
+  #if {$mapping==1}
+  {
+    #map undo
+  }
+}
+
+#alias {mapoff}
+{
+  #if {$mapping==1}
+  {
+    #variable mapping 0;
+    #map flag static on;
+    #showme {#MAPPING disabled}};
+}
+
+#alias {mapon}
+{
+  #if {$mapping==0}
+  {
+    #variable mapping 1;
+    #map flag static off;
+    #showme {#MAPPING enabled}
+  }
+}
+
+#alias {roomname} {#map name %1}
+#alias {roomsym}  {#map set roomsymbol %1}
+#alias {mblue}    {#map set roomcolor <049>}
+#alias {myellow}  {#map set roomcolor <039>}
+#alias {mgreen}   {#map set roomcolor <029>}
+#alias {mpurp}    {#map set roomcolor <059>}
+#alias {load.map}
+{
+  #map read maps/%1
+}
+
+#alias {mapping.help}
+{
+  #showme {<039>,--------------------------------------,};
+  #showme {<039>| Chip & Chap Mapping Module           |};
+  #showme {<039>'--------------------------------------'};
+  #showme {<039>,--------------------------------------,};
+  #showme {<039>| You set the following:               |};
+  #showme {<039>|   roomname <name for #map run>       |};
+  #showme {<039>|   roomsym <3 chars to display>       |};
+  #showme {<039>|                                      |};
+  #showme {<039>|   mblue   #set room to blue>         |};
+  #showme {<039>|   myellow                            |};
+  #showme {<039>|   mgreen                             |};
+  #showme {<039>|   mpurp                              |};
+  #showme {<039>|                                      |};
+  #showme {<039>|   mapon  # turn automapper on        |};
+  #showme {<039>|   mapoff # turn it off               |};
+  #showme {<039>|                                      |};
+  #showme {<039>| Optionally:                          |};
+  #showme {<039>|    mapping.help                      |};
+  #showme {<039>|    load.map <map name>               |};
+  #showme {<039>'--------------------------------------'<099>};
+}
+
+
+#delay 1 mapping.help
+
+#class {mapping} {close}
+
+
+
+
+
+
+
+
+
+
