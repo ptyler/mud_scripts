@@ -20,7 +20,7 @@
 
 #act {^Your studies complete, you close %1} { synctick }
 
-#var {needbless} {0}
+#var {needblessing} {0}
 
 
 /*
@@ -35,12 +35,12 @@
 }
   
 
-#act {^You feel less righteous} {#var needbless 1}
-#act {^You feel righteous.} {#var needbless 0}
+#act {^You feel less righteous} {#var needblessing 1}
+#act {^You feel righteous.} {#var needblessing 0}
 
 #alias {do_buffs}
 {
-  #if { $needbless && !$inbattle && !$mounted && !$resting }
+  #if { $needblessing && !$inbattle && !$mounted && !$resting }
   {
     cbless me
   }
