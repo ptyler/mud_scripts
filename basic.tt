@@ -11,6 +11,7 @@
 
 #var {mounted} {0}
 #var {inbattle} {0}
+#var {wasjustinbattle} {0}
 #var {sitting} {0}
 #var {resting} {0}
 #var {sleeping} {0}
@@ -20,6 +21,7 @@
 #var {autoloot} {0}
 #var {mounted} {0}
 #var {mapping} {0}
+#var {ineedtorest} {0}
 
 /* variable captures */
 
@@ -28,7 +30,8 @@
   #var hp {%1};
   #var maxhp {%2};
   #var mp {%3};
-  #var maxmp {%4}
+  #var maxmp {%4};
+  #math {resthp} {$maxhp * 0.3333}
 }
 
 #act {You have scored %1 exp, and have %2(%3) steel coins.}
@@ -43,7 +46,18 @@
   #var hp {%1};
   #var mp {%2};
   #var earned_xp {%3};
+  #if {$hp <= $resthp}
+  {
+    #var ineedtorest 1
+  };
+  #else
+  {
+    #var ineedtorest 0
+  }
+
 }
+
+#act {^You raise a level!} {score}
 
 #act {^You {miss|bludgeon|slash|pierce|bruise|barely|hit} %1}
 {
@@ -69,6 +83,7 @@
 #act {^You swing into the saddle of this great steed.} {#var mounted 1}
 #act {^You throw a leg over the beast, and slide off its side.} {#var mounted 0}
 #act {^You no longer ride %1} {#var mounted {0}}
+#act {^You sit down and rest your tired bones.} {#var resting 1}
 #act {^You stand up.} 
 {
   #var resting 0;
@@ -78,6 +93,7 @@
 #act {^%1 is dead! R.I.P.}
 {
   #var inbattle 0;
+  #var wasjustinbattle 1;
   exa corpse;
   #if {$autoloot == 1}
   {
@@ -141,7 +157,9 @@
 }
 
 
-basic_help
+/* need at least 1 score output to populate variables */
+score
+#delay 1 basic_help
 
 
 
