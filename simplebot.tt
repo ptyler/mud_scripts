@@ -1,0 +1,66 @@
+#class {simplebot} kill
+#class {simplebot} open
+
+#act {^%1 attempts to flee.} {#var inbattle 0}
+#act {^They aren't here.}  {#var inbattle 0}
+#act {^#END OF PATH.} {nogo}
+
+#alias {fight}
+{
+  #math {minhp} {$maxhp * 0.75};
+  #if { $hp > $resthp && !$inbattle && !$resting && !$sleeping }
+  {
+    #var {inbattle} {1};
+    kill %1
+  }
+}
+
+#alias {dowalk}
+{
+  #if { $wasjustinbattle && !$resting }
+  {
+    #var wasjustinbattle 0;
+    dorest;
+    look;
+  };
+  #elseif { !$resting && !$inbattle }
+  {
+    track;
+    #path walk forward
+  };
+}
+
+#alias {dorest}
+{
+  #if { $ineedtorest && !$resting && !$inbattle}
+  {
+    #showme #AHHH I NEED TO REST;
+    #var resting 1;
+    rest;
+    #tick {resting} {#cr} {30}
+  };
+  #elseif { $resting && !$ineedtorest }
+  {
+    #showme #Ahhh DONE RESTING;
+    #untick {resting};
+    #var resting 0;
+    stand
+  }
+}
+
+#alias {gogo}
+{
+  #tick {gloop}
+  {
+    dorest;
+    dowalk;
+  } {2}
+}
+
+#alias {nogo}
+{
+  #untick gloop
+}
+
+#class {simplebot} close
+
