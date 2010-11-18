@@ -26,6 +26,7 @@
   #elseif { !$resting && !$inbattle }
   {
     track;
+    #if {$grouped} {gtell . hunt}
     #path walk forward
   };
 }
