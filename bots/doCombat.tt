@@ -39,13 +39,17 @@
 	
 	#if {$listsize} {  /* is there a list?? */
 
-		#showme {\n-- GETTING RANDOM TARGET FROM REMAINING};
+		#showme {\n-- GETTING TARGET FROM REMAINING};
 
-		#math {gt_index} {1 d &hitlist[]};
-		#showme {-- Random Target Selected: $hitlist[$gt_index][1]  HP REQUIRED: $hitlist[$gt_index][2]}; 
+		#if {$listsize > 1} {
+			#math {gt_index} {1 d &hitlist[]};
+			#showme {-- Random Target Selected: $hitlist[$gt_index][1]  HP REQUIRED: $hitlist[$gt_index][2]}; 
+			#var gottarget {$hitlist[$gt_index][1]}
+		};#else {
+			#var gottarget {$hitlist[1][1]};
+			#showme {HAVE TARGET: $gottarget}
+		}
 
-		#var gottarget {$hitlist[$gt_index][1]};
-		#showme {HAVE TARGET: $gottarget};
 	};#else {
 		#showme {-- NO LIST};
 		#bell
