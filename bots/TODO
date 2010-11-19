@@ -143,6 +143,8 @@ doCombat.class:
 	- Pick a mob, kill it.
 	- Integrate into main bot so that we have a working version
 
+- Copy target index into a new list for use by a new class doViolence, that way it can start using all the variables to operate on victims/assistants
+  and avoid them
 
 -- IDEAS:
 ---------
