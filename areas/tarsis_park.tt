@@ -1,6 +1,17 @@
 #class {tarsis_park} kill
 #class {tarsis_park} open
 
+#act {^A white pigeon is here pecking at some crumbs of bread.} {fight pigeon}
+#act {^A small little chipmunk hides in the bushes as it peeks out at you.} {fight chipmunk}
+#act {^A white bunny hops around in the grassy field.} {fight bunny}
+#act {^A furry brown gopher is digging up a hole in the ground here.} {fight gopher}
+#act {^A small robin hops around in the bushes.} {fight robin}
+#act {^A colorful butterfly flutters around in the wind.} {fight colorful}
+#act {^A furry little squirrel scampers around looking for food.} {fight squirrel}
+#act {^A cute little kitten plays clumsily here.} {fight kitten}
+#act {^A little white mouse scurries along the path.} {fight mouse}
+#act {^A small puppy is here wandering around the park.} {fight puppy}
+
 #var {tarsis_park} {s;e;s;e;w;s;e;e;n;s;s;w;e;s;e;n;s;w;s;s;e;w;n;w;s;w;s;e;s;e;w;s;w;s;n;n;w;s;n;n;n;w;s;s;n;n;w;s;n;e;n;e;n;e;w;n;w;w;s;s;n;w;n;w;n;e;n;e;s;e;n;s;w;n;w;n;e;w;w;n;w;e;s;w;s;e;w;s;e;s;e;s;w;s;e;s;e;w;s;e;s;n;w;n;n;w;n;w;w}
 
 #var {tarsis_park_rev} {e;e;s;e;s;s;e;s;n;w;n;e;w;n;w;n;e;n;w;n;w;n;e;w;n;e;n;w;e;s;e;e;w;s;e;s;e;n;s;w;n;w;s;w;s;e;s;e;s;n;n;e;e;s;e;w;s;w;s;w;s;n;e;s;s;n;n;e;s;s;s;n;e;s;s;n;e;n;e;w;n;w;n;e;n;e;s;e;w;n;n;e;n;s;w;n;w;e;n;n;s;w;w;n;e;w;n;w;n}
