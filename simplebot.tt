@@ -63,5 +63,29 @@
   #untick gloop
 }
 
+#alias {sb.load.tarsis_park}      {#read areas/tarsis_park.tt}
+#alias {sb.load.tol_evil}         {#read areas/tol_evil.tt}
+#alias {sb.load.balifor_brogs}    {#read areas/tol_evil.tt}
+#alias {sb.load.balifor_dumps}    {#read areas/tol_evil.tt}
+
+#alias {sb.help}
+{
+  #showme {<039>,--------------------------------------,};
+  #showme {<039>|<049>           PaP Super Bot!             <039>|};
+  #showme {<039>'--------------------------------------'};
+  #showme {<039>,--------------------------------------,};
+  #showme {<039>|<049> sb.help                              <039>|};
+  #showme {<039>|<049>                                      <039>|};
+  #showme {<039>|<049> Areas to load. these contain both    <039>|};
+  #showme {<039>|<049> the mobs to fight and the path. they <039>|};
+  #showme {<039>|<049> also load the #path too!             <039>|};
+  #showme {<039>|<049>                                      <039>|};
+  #showme {<039>|<049> sb.load.tarsis_park                  <039>|};
+  #showme {<039>|<049> sb.load.tol_evil                     <039>|};
+  #showme {<039>|<049> sb.load.balifor_brogs                <039>|};
+  #showme {<039>|<049> sb.load.balifor_dumps                <039>|};
+  #showme {<039>'--------------------------------------'<099>};
+}
+
 #class {simplebot} close
 
