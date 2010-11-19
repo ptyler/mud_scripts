@@ -11,7 +11,7 @@
   #if { $hp > $resthp && !$inbattle && !$resting && !$sleeping }
   {
     #var {inbattle} {1};
-    backstab %1
+    kill %1
   }
 }
 
@@ -84,6 +84,8 @@
   #showme {<039>|<049> sb.load.balifor_dumps                <039>|};
   #showme {<039>'--------------------------------------'<099>};
 }
+
+#delay 1 #showme <049>-:><069>LOADED<049><:- <069>PaP Super Bot!  Type sb.help for help<099>
 
 #class {simplebot} close
 
