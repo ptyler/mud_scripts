@@ -1,0 +1,29 @@
+#class {mobs} {kill}
+#class {mobs} {open}
+
+#action {^A furry brown gopher is digging up a hole in the ground here.} {@addMobInfo{gopher;30;n}}
+#action {^A white pigeon is here pecking at some crumbs of bread.} {@addMobInfo{pigeon;30;n}}
+#action {^A colorful butterfly flutters around in the wind.} {@addMobInfo{butterfly;20;n}}
+#action {^A cute little kitten plays clumsily here.} {@addMobInfo{kitten;12;n}}
+#action {^A large brown dog is wandering around with his tongue hanging out.} {@addMobInfo{dog;25;n}}
+#action {^A small robin hops around in the bushes.} {@addMobInfo{robin;25;n}}
+#action {^A little white mouse scurries along the path.} {@addMobInfo{mouse;10;n}}
+#action {^A cute black duckling pecks at some bread crumbs on the ground.} {@addMobInfo{black.duckling;20;n}}
+#action {^A cute white duckling pecks at some bread crumbs on the ground.} {@addMobInfo{white.duckling;18;n}}
+#action {^A white duck waddles around while she waits to be fed.} {@addMobInfo{duck;25;n}}
+#action {^A park janitor walks around picking up trash.} {@addMobInfo{janitor;101;n}}
+#action {^An adorable pet cat leaps to and fro trying to capture a squirrel.} {@addMobInfo{cat;23;n}}
+#action {^A tall gardener is here sculpting something from the bushes.} {@addMobInfo{gardener;110;n}}
+#action {^A white bunny hops around in the grassy field.} {@addMobInfo{bunny;10;n}}
+#action {^A small little chipmunk hides in the bushes as it peeks out at you.} {@addMobInfo{chipmunk;20;n}}
+#action {^A young couple walks along the path, hand in hand.} {@addMobInfo{couple;120;n}}
+#action {^A little boy is rolling around in the grass here.} {@addMobInfo{boy;104;n}}
+#action {^A young deer with a fluffy white tail bounds its way around the park.} {@addMobInfo{deer;45;n}}
+#action {^An old man is here maintaining the park's plants.} {@addMobInfo{old.man;122;n}}
+
+
+#action {^A park guard patrols the area, trying to maintain peace and order.} {@addMobInfo{guard;200;a}}
+#action {^An old man sits here by the fountain feeding the ducks.} {@addMobInfo{old.man;200;a}}
+
+
+#class {mobs} {close}
