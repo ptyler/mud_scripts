@@ -145,14 +145,14 @@
 
 }
 
-#function {addMobInfo} {
+#alias {addMobInfo} {
 
 	#math size_list {&hitlist[] + 1};
 
 	#if {&hitlist[]} {
 		#list {hitlist[$size_list]} {add} {%1} {%2} {%3};
-		#var chkCombat {1};
-	} {
+		#var chkCombat {1}
+	};#else {
 		#list {hitlist[1]} {add} {%1} {%2} {%3};
 		#var {havelist} {1};
 		#var chkCombat {1}
