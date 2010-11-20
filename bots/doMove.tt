@@ -15,7 +15,8 @@
 
 			#if {$botrunning} {
 	
-				#path walk forward;
+				cleanlist;
+				#path walk forward
 				
 			};#else {
 
