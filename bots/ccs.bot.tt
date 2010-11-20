@@ -78,7 +78,7 @@
 	load.doCombat;
 	#class;
 
-	#if {$class.doPulse.loaded} {
+	#if {$class_doPulse_loaded} {
 
 		@fprintf{1;** ccs.bot:: doPulse Loaded: Success}		
 	
@@ -88,7 +88,7 @@
 	
 	};
 
-	#if {$class.doMove.loaded} {
+	#if {$class_doMove_loaded} {
 
 		@fprintf{1;** ccs.bot:: doMove Loaded: Success}
 
@@ -98,7 +98,7 @@
 
 	};
 	
-	#if {$class.doEatDrink.loaded} {
+	#if {$class_doEatDrink_loaded} {
 
 		@fprintf{1;** ccs.bot:: doEatDrink Loaded: Success}
 
@@ -108,7 +108,7 @@
 
         };
 	
-	#if {$class.doCombat.loaded} {
+	#if {$class_doCombat_loaded} {
 
 		@fprintf{1;** ccs.bot:: doCombat Loaded: Success}
 

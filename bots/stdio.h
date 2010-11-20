@@ -2,7 +2,7 @@
 #class {stdio.h} {open}
 
 
-#var vmsg {0}
+#var vmsg {1}
 
 
 #alias verbose.level {
