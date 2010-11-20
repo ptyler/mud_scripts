@@ -131,7 +131,7 @@
 #alias {load.doMove} {#class {doMove} {read} {doMove.tt}}
 #alias {load.doPulse} {#class {doPulse} {read} {doPulse.tt}}
 #alias {load.doEatDrink} {#class {doEatDrink} {read} {doEatDrink.tt}}
-#alias {load.doCombat} {#class {doCombat} {read} {doEatDrink.tt}}
+#alias {load.doCombat} {#class {doCombat} {read} {doCombat.tt}}
 
 
 

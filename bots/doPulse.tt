@@ -1,5 +1,5 @@
-#class {doPulse.class} kill
-#class {doPulse.class} open
+#class {doPulse} kill
+#class {doPulse} open
 
 
 #var botrunning {0}  /* check var for running/stopped pulse */
@@ -77,4 +77,4 @@
 
 
 #var class_doPulse_loaded {1}
-#class {doPulse.class} close
+#class {doPulse} close
