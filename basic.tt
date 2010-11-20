@@ -46,6 +46,8 @@
  * Better to have and not need than to need and not have. ;)
  *****************************************************************************/
 
+#act {^%1 is now a member of your group.} {#var grouped 1}
+
 #act {^You have %1(%2) hit and %3(%4) movement points.}
 {
   #var hp {%1};
@@ -138,6 +140,10 @@
 #high {^%1 tells your group '%2} {<049>}
 #high {^You tell %1 '%2} {<039>}
 #high {^#10 SECONDS %1} {<039>}
+#sub {~^%1H %2V %3} {%1/${maxhp}H %2/${maxmp}V %3}
+#sub {^You feel enlightened.} {<049>-:><039>skill up!<049><:- <039>You feel enlightened<099>}
+#sub {^You feel especially skillful today.} {<049>-:><039>skill up!<049><:- <039>You feel especially skillful today.<099>}
+
 
 #alias {setfood}  {#var food {%1}}
 #alias {setbag}   {#var container {%1}}
@@ -167,7 +173,7 @@
 
 /* need at least 1 score output to populate variables */
 score
-#delay 1 basic.help
+#delay 1 #showme <049>-:><069>LOADED<049><:- <069>Basic module.  Type basic.help for help<099>
 
 #class {basic} {close}
 
