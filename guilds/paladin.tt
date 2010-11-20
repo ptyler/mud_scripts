@@ -1,0 +1,19 @@
+#class {paladin} kill
+#class {paladin} open
+
+#act {^The gods will grant you audience through prayer again,%1} { beseech paladine }
+#act {^The radiance surrounding you fades away.} { cast 'aura of glory' }
+#act {^You are sent sprawling %1} { stand }
+#act {^You feel less powerful.} { cast 'holy arms' }
+#act {^You feel less righteous.} { cast 'bless' me }
+#act {^You fumble and drop %1} { get silver.sword; wield silver.sword }
+
+#act {^Your studies complete, you close %1} { synctick }
+
+#act {^Your hands tingle as a feeling of goodness fills you.} {}
+
+/* load message */
+
+#delay 1 #showme <049>-:><069>LOADED<049><:- <069>Paladin module.<099>
+
+#class {paladin} close
