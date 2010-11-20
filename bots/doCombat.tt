@@ -93,8 +93,8 @@
 
 #function {addMobInfo} {
 
-	#showme {List: $hitlist};
-	#showme {-- CORRELATING MOB INFORMATION:\nTarget Name: %1\nMin HP req: %2\nType: %3\n--------------};
+	@fprintf{3;** doCombat:: -- List: $hitlist};
+	@fprintf{3;** doCombat:: -- CORRELATING MOB INFORMATION:\nTarget Name: %1\nMin HP req: %2\nType: %3\n--------------};
 
 	#math size_list {&hitlist[] + 1};
 
