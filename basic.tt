@@ -19,6 +19,8 @@
 #var {mounted} {0}
 #var {ineedtorest} {0}
 #var {grouped} {0}
+#var {resthp} {0}
+#var {restmp} {0}
 
 /*
  * default actions?
@@ -51,6 +53,7 @@
   #var mp {%3};
   #var maxmp {%4};
   #math {resthp} {$maxhp * 0.3333}
+  #math {restmp} {$maxmp * 0.3333}
 }
 
 #act {You have scored %1 exp, and have %2(%3) steel coins.}
@@ -65,15 +68,15 @@
   #var hp {%1};
   #var mp {%2};
   #var earned_xp {%3};
-  #if {$hp <= $resthp}
+  #if {$hp <= $resthp || $mp < $restmp }
   {
     #var ineedtorest 1
+    #var restedup 0
   };
-  #else
+  #elseif {$hp == $maxhp && $mp == $maxmp}
   {
     #var ineedtorest 0
   }
-
 }
 
 #act {^You {miss|bludgeon|slash|pierce|bruise|barely|hit} %1 %2}
