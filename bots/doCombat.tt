@@ -54,6 +54,7 @@
 		#if {!$isrest} {
 
 			#send {rest};
+			cleanlist;
 			#var isrest {1}
 
 		};

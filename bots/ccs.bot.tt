@@ -102,7 +102,7 @@
 	#var maxhp {%2};
 	#var currentmp {%3};
 	#var maxmp {%4};
-	#math {resthp} {$maxhp * 0.3333}
+	#math {resthp} {$maxhp * 0.75}
 	#math {restmp} {$maxmp * 0.3333}
 
 }
