@@ -21,6 +21,7 @@
 #variable issleep {0}
 #variable ishungry {0}
 #variable isthirsty {0}
+#variable needrest {0}
 
 
  /* Minor variables - maybe dupes in classes
@@ -134,7 +135,41 @@
 #alias {load.doCombat} {#class {doCombat} {read} {doCombat.tt}}
 
 
+ /* Core actions - STOLEN FROM CHIP!! BwHAhAha!!
+  *********************************************************
 
+#act {^You have %1(%2) hit and %3(%4) movement points.} {
+
+	#var currenthp {%1};
+	#var maxhp {%2};
+	#var currentmp {%3};
+	#var maxmp {%4};
+	#math {resthp} {$maxhp * 0.3333}
+	#math {restmp} {$maxmp * 0.3333}
+
+}
+
+#act {^%1H %2V %3X %5} {
+
+	#var currenthp {%1};
+	#var currentmp {%2};
+	#var earned_xp {%3};
+
+	#if {$currenthp <= $resthp} {
+
+		#var needrest 1
+
+	}; #else {
+
+		#var needrest 0;
+
+		#if {$isrest} {
+
+			#send {stand}
+			#var isrest {0};
+		};	
+	}
+}
 
 
 

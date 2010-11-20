@@ -2,24 +2,89 @@
 #class {doCombat} {open}
 
 
-#var chkCombat {1}
+#var chkCombat {0}
 #var gottarget {self}
 #var havelist {0}
 #var hitlist {0}
 #var couldkill {0}
+#var currenthp {0}
 
 
 #alias cleanlist {#list {hitlist} {clear};#var {havelist} {0}}
 #alias testlist {@addMobInfo{%1;%2;%3};#showme {$hitlist}}
 
+#act {^%1 is dead! R.I.P.} {
 
-/* need to track real HP */
+	#var isfight 0;
+	#send {get all.coins corpse};
+	cleanlist;
+	#send {look}
+}
 
-/* Need to write doViolence to gettarget/kill the fucker, check on $chkCombat and $havelist, set on $isfight */ 
+
+#act {^You {miss|bludgeon|slash|pierce|bruise|barely|hit} %1 %2} {
+
+	#if {!$isfight && "%1" != "feel"} {
+
+		#var isfight {1}
+	}
+}
+
 
 
 
 /* This takes a list */
+
+#function {doCombat} {
+
+	/* check resting */
+	
+	
+
+	#if {$needrest} {
+	
+		@fprintf{2;** doCombat:: -- Need rest - taking a break};
+		
+		#if {!$isrest} {
+
+			#send {rest};
+			#var isrest {1};
+
+		};
+		
+		#return
+	}
+
+	/* check that we have a list to get targets*/
+
+	#if {!$isfight} {
+
+		#if {$havelist} {
+
+			@fprintf{3;** doCombat:: -- Have a list getting a target...}
+
+			@gettarget{}
+
+		};#else {
+
+			#var isfight {0}
+			#return
+		}
+
+		#if {$gottarget} {
+	
+			#send {kill $gottarget};
+			#var isfight {1};
+			#return
+		}
+	}
+
+	#return
+
+
+
+}
+
 
 #function {gettarget} {
 
@@ -76,9 +141,8 @@
 
 			@fprintf{2;** doCombat:: -- AQUIRED TARGET: $gottarget}
 
-			#var chkCombat {1};
-			#list {hitlist} {clear};
-			#var havelist {0}
+			#var chkCombat {0};
+
 		}
 
 	};#else {
@@ -101,13 +165,13 @@
 	#if {&hitlist[]} {
 
 		#list {hitlist[$size_list]} {add} {%1} {%2} {%3};
-		#var chkCombat {0} 
+		#var chkCombat {1} 
 
 	};#else {
 
 		#list {hitlist[1]} {add} {%1} {%2} {%3};
 		#var {havelist} {1};
-		#var chkCombat {0}
+		#var chkCombat {1}
 
 	};
 	#return
