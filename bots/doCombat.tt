@@ -27,19 +27,12 @@
 	#if {!$isfight && "%1" != "feel"} {
 
 		#var isfight {1}
-	}
+	};
 }
 
 
-
-
-/* This takes a list */
-
 #function {doCombat} {
 
-	/* check resting */
-	
-	
 
 	#if {$needrest} {
 	
@@ -48,26 +41,26 @@
 		#if {!$isrest} {
 
 			#send {rest};
-			#var isrest {1};
+			#var isrest {1}
 
 		};
 		
 		#return
-	}
+	};
 
-	/* check that we have a list to get targets*/
 
 	#if {!$isfight} {
 
 		#if {$havelist} {
 
-			@fprintf{3;** doCombat:: -- Have a list getting a target...}
-
-			@gettarget{}
+			@fprintf{3;** doCombat:: -- Have a list getting a target...};
+			@gettarget{};
+			#var isfight {1};
+			kill $gottarget
 
 		};#else {
 
-			#var isfight {0}
+			#var isfight {0};
 			#return
 		}
 
@@ -76,13 +69,10 @@
 			#send {kill $gottarget};
 			#var isfight {1};
 			#return
-		}
-	}
+		};
+	};
 
 	#return
-
-
-
 }
 
 
@@ -157,24 +147,16 @@
 
 #function {addMobInfo} {
 
-	@fprintf{3;** doCombat:: -- List: $hitlist};
-	@fprintf{3;** doCombat:: -- CORRELATING MOB INFORMATION:\nTarget Name: %1\nMin HP req: %2\nType: %3\n--------------};
-
 	#math size_list {&hitlist[] + 1};
 
 	#if {&hitlist[]} {
-
 		#list {hitlist[$size_list]} {add} {%1} {%2} {%3};
-		#var chkCombat {1} 
-
-	};#else {
-
+		#var chkCombat {1};
+	} {
 		#list {hitlist[1]} {add} {%1} {%2} {%3};
 		#var {havelist} {1};
 		#var chkCombat {1}
-
-	};
-	#return
+	}
 }
 
 

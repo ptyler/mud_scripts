@@ -25,5 +25,4 @@
 #action {^A park guard patrols the area, trying to maintain peace and order.} {@addMobInfo{guard;200;a}}
 #action {^An old man sits here by the fountain feeding the ducks.} {@addMobInfo{old.man;200;a}}
 
-
 #class {mobs} {close}

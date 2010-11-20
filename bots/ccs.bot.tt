@@ -1,7 +1,7 @@
 #class {ccs.bot} kill
 #class {ccs.bot} open
 
-#class {stdio.h} {read} {stdio.h}
+#class {stdio} {read} {stdio.tt}
 
  /* Important shit - class load checks etc.
   *****************************************************************************/
@@ -136,7 +136,7 @@
 
 
  /* Core actions - STOLEN FROM CHIP!! BwHAhAha!!
-  *********************************************************
+  *********************************************************/
 
 #act {^You have %1(%2) hit and %3(%4) movement points.} {
 
@@ -167,29 +167,9 @@
 
 			#send {stand}
 			#var isrest {0};
-		};	
+		}	
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
  /* help down here
   ****************************/
