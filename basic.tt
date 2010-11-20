@@ -6,11 +6,9 @@
  * Basics relative to all characters
  ******************************************************************************/
 
-#split
-
-
 #var {mounted} {0}
 #var {inbattle} {0}
+#var {wasjustinbattle} {0}
 #var {sitting} {0}
 #var {resting} {0}
 #var {sleeping} {0}
@@ -19,16 +17,45 @@
 #var {food} {food}
 #var {autoloot} {0}
 #var {mounted} {0}
-#var {mapping} {0}
+#var {ineedtorest} {0}
+#var {grouped} {0}
+#var {resthp} {0}
+#var {restmp} {0}
 
-/* variable captures */
+/*
+ * default actions?
+ *****************************************************************************/
+
+#split
+
+#act {^You raise a level!} {score}
+#act {^You are hungry.} { get $food $container; eat $food }
+#act {^You are thirsty.} { drink water }
+
+#act {^There were %1 coins.}
+{
+  #if { $grouped }
+  {
+    #split %1
+  }
+}
+
+/*
+ * the state of the char!  I know some are almost always needed and some are
+ * likely to never be needed except with a bot or some excessive automation.
+ * Better to have and not need than to need and not have. ;)
+ *****************************************************************************/
+
+#act {^%1 is now a member of your group.} {#var grouped 1}
 
 #act {^You have %1(%2) hit and %3(%4) movement points.}
 {
   #var hp {%1};
   #var maxhp {%2};
   #var mp {%3};
-  #var maxmp {%4}
+  #var maxmp {%4};
+  #math {resthp} {$maxhp * 0.3333}
+  #math {restmp} {$maxmp * 0.3333}
 }
 
 #act {You have scored %1 exp, and have %2(%3) steel coins.}
@@ -38,61 +65,65 @@
   #var bankc {%3}
 }
 
-
-#action {^Alas, you cannot go that way...}
+#act {^%1H %2V %3X %5}
 {
-  #if {$mapping==1}
+  #var hp {%1};
+  #var mp {%2};
+  #var earned_xp {%3};
+  #if {$hp <= $resthp || $mp < $restmp }
   {
-    #map undo
+    #var ineedtorest 1
+    #var restedup 0
+  };
+  #elseif {$hp == $maxhp && $mp == $maxmp}
+  {
+    #var ineedtorest 0
   }
 }
 
-#act {^You are hungry.} { get $food $container; eat $food }
-#act {^You are thirsty.} { drink water }
-#act {^There were %1 coins.} { split %1 }
-#act {^You now ride a %1} {#var mounted {1}}
-#act {^You no longer ride %1} {#var mounted {0}}
+#act {^You {miss|bludgeon|slash|pierce|bruise|barely|hit} %1 %2}
+{
+  #if {$inbattle==0 && "%1" != "feel"}
+  {
+    #var inbattle 1
+  }
+}
 
+#act {^You now ride a %1} {#var mounted 1}
+#act {^You swing into the saddle of this great steed.} {#var mounted 1}
+#act {^You throw a leg over the beast, and slide off its side.} {#var mounted 0}
+#act {^You no longer ride %1} {#var mounted 0}
+#act {^You sit down and rest your tired bones.} {#var resting 1}
+#act {^You stand up.}
+{
+  #var resting 0;
+  #var sitting 0;
+}
+
+/*
+ * since the on_death action can be used in so many places in different contexts,
+ * might be a good idea to wrap this in an alias to turn on default_rip or 
+ * something of that nature so that once a class is killed, we can return to
+ * where we started.
+ *****************************************************************************/
 #act {^%1 is dead! R.I.P.}
 {
   #var inbattle 0;
+  #var wasjustinbattle 1;
   exa corpse;
   #if {$autoloot == 1}
   {
-    get all corpse
+    get all.coins corpse;
   }
 }
 
-#alias {roomname} {#map name %1}
-#alias {roomsym}  {#map set roomsymbol %1}
-#alias {mblue}    {#map set roomcolor <049>}
-#alias {myellow}  {#map set roomcolor <039>}
-#alias {mgreen}   {#map set roomcolor <029>}
-#alias {mpurp}    {#map set roomcolor <059>}
+/*
+ * These trigger synctick to help, at least a little, to stay in sync with the
+ * MUD's internal tick.  These should be class independent triggers.
+ *****************************************************************************/
 
-#alias {mapoff}
-{
-  #if {$mapping==1}
-  {
-    #variable mapping 0;
-    #map flag static on;
-    #showme {#MAPPING disabled}};
-}
+#act {^There is lightning in the sky.} {synctick}
 
-#alias {mapon}
-{
-  #if {$mapping==0}
-  {
-    #variable mapping 1;
-    #map flag static off;
-    #showme {#MAPPING enabled}
-  }
-}
-
-#alias {setfood}  {#var food {%1}}
-#alias {setbag}   {#var container {%1}}
-#alias {rl}       {#read basic.tt}
-#alias {autoloot} {#var autoloot {%1}; #showme {autoloot set to: %1}}
 #alias {synctick}
 {
   #unticker {ticky};
@@ -103,25 +134,48 @@
   } {60}
 }
 
+
 #tick {idle} {#cr} {300}
 
 #high {^%1 tells your group '%2} {<049>}
 #high {^You tell %1 '%2} {<039>}
 #high {^#10 SECONDS %1} {<039>}
+#sub {~^%1H %2V %3} {%1/${maxhp}H %2/${maxmp}V %3}
+#sub {^You feel enlightened.} {<049>-:><039>skill up!<049><:- <039>You feel enlightened<099>}
+#sub {^You feel especially skillful today.} {<049>-:><039>skill up!<049><:- <039>You feel especially skillful today.<099>}
 
-#class {basic} {close}
 
+#alias {setfood}  {#var food {%1}}
+#alias {setbag}   {#var container {%1}}
+#alias {rl}       {#read basic.tt}
+#alias {autoloot} {#var autoloot {%1}; #showme {autoloot set to: %1}}
+#alias {load.mapping}   {#read mapping.tt}
+#alias {load.cleric}    {#read guilds/cleric.tt}
+#alias {load.paladin}    {#read guilds/paladin.tt}
 
-#alias {basic_help}
+#alias {basic.help}
 {
-  #showme {<039>You must run: setfood <food name>}
-  #showme {<039>You must run: setbag  <container type>}
+  #showme {<049>,--------------------------------------,};
+  #showme {<049>|<079> Chip & Chap Basic MUD Module         <049>|};
+  #showme {<049>'--------------------------------------'};
+  #showme {<049>,--------------------------------------,};
+  #showme {<049>|<079> You set the following:               <049>|};
+  #showme {<049>|<079>   setbag  <bag name>                 <049>|};
+  #showme {<049>|<079>   setfood <food name>                <049>|};
+  #showme {<049>|<079>                                      <049>|};
+  #showme {<049>|<079> Optionally:                          <049>|};
+  #showme {<049>|<079>    basic.help                        <049>|};
+  #showme {<049>|<079>    load.mapping                      <049>|};
+  #showme {<049>|<079>    load.{cleric|scout|...etc}        <049>|};
+  #showme {<049>'--------------------------------------'<099>};
 }
 
 
-basic_help
+/* need at least 1 score output to populate variables */
+score
+#delay 1 #showme <049>-:><069>LOADED<049><:- <069>Basic module.  Type basic.help for help<099>
 
-
+#class {basic} {close}
 
 
 

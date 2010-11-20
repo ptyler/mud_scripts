@@ -36,7 +36,7 @@
 
 			#if {$currenthp < $hitlist[$gt_count][2]} {
 
-				@fprintf{3;** doCombat:: -- REMOVING: $hitlist[$gt_count][1] HP REQUIRED WAS: $hitlist[$gt_count][2]};
+				@fprintf{3;** doCombat:: -- REMOVING: $hitlist[$gt_count][1]  :::  HP REQUIRED WAS: $hitlist[$gt_count][2]};
 
 				#list {hitlist} {delete} {$gt_count};				
 				#list {hitlist} {size} {size_list};
