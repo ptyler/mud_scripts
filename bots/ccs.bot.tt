@@ -40,7 +40,7 @@
 
 	#if {$class_doPulse_loaded} {
 
-		doPulse 3
+		doPulse 4
 
 	};#else {
 

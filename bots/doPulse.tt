@@ -13,9 +13,9 @@
 	#if {$botrunning} {
 
 		#line {gag};
-		#if {$class_doMove_loaded} {doMove};
-		#if {$class_doEatDrink_loaded} {doEatDrink};
 		#if {$class_doCombat_loaded} {doCombat};
+		#if {$class_doMove_loaded} {doMove};
+		#if {$class_doEatDrink_loaded} {doEatDrink}
 
 	};#else {
 

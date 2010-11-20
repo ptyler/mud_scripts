@@ -30,6 +30,19 @@
 	};
 }
 
+#act {^They aren't here.} {
+
+	cleanlist;
+	#var chkCombat {0};
+	#var isfight {0}
+}
+
+#act {^Hit whom?} {
+
+	cleanlist;
+	#var chkCombat {0};
+	#var isfight {0}
+}
 
 #alias {doCombat} {
 
@@ -52,20 +65,16 @@
 		#if {$havelist} {
 
 			#showme {** doCombat:: -- Have a list getting a target...};
-			gettarget{};
+			gettarget;
+			kill $gottarget;
 			#var isfight {1};
-			kill $gottarget
+			#var gottarget {}
 
 		};#else {
 
 			#var isfight {0};
+			#var chkCombat {0};
 		}
-
-		#if {$gottarget} {
-	
-			#send {kill $gottarget};
-			#var isfight {1}
-		};
 	};
 }
 
@@ -120,7 +129,6 @@
 
 			#showme {** doCombat:: -- AQUIRED TARGET: $gottarget};
 
-			#var chkCombat {0}
 
 		}
 
