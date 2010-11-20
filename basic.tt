@@ -142,22 +142,23 @@
 #alias {autoloot} {#var autoloot {%1}; #showme {autoloot set to: %1}}
 #alias {load.mapping}   {#read mapping.tt}
 #alias {load.cleric}    {#read guilds/cleric.tt}
+#alias {load.paladin}    {#read guilds/paladin.tt}
 
 #alias {basic.help}
 {
-  #showme {<039>,--------------------------------------,};
-  #showme {<039>| Chip & Chap Basic MUD Module         |};
-  #showme {<039>'--------------------------------------'};
-  #showme {<039>,--------------------------------------,};
-  #showme {<039>| You set the following:               |};
-  #showme {<039>|   setbag  <bag name>                 |};
-  #showme {<039>|   setfood <food name>                |};
-  #showme {<039>|                                      |};
-  #showme {<039>| Optionally:                          |};
-  #showme {<039>|    basic.help                        |};
-  #showme {<039>|    load.mapping                      |};
-  #showme {<039>|    load.{cleric|scout|...etc}        |};
-  #showme {<039>'--------------------------------------'<099>};
+  #showme {<049>,--------------------------------------,};
+  #showme {<049>|<079> Chip & Chap Basic MUD Module         <049>|};
+  #showme {<049>'--------------------------------------'};
+  #showme {<049>,--------------------------------------,};
+  #showme {<049>|<079> You set the following:               <049>|};
+  #showme {<049>|<079>   setbag  <bag name>                 <049>|};
+  #showme {<049>|<079>   setfood <food name>                <049>|};
+  #showme {<049>|<079>                                      <049>|};
+  #showme {<049>|<079> Optionally:                          <049>|};
+  #showme {<049>|<079>    basic.help                        <049>|};
+  #showme {<049>|<079>    load.mapping                      <049>|};
+  #showme {<049>|<079>    load.{cleric|scout|...etc}        <049>|};
+  #showme {<049>'--------------------------------------'<099>};
 }
 
 
