@@ -31,12 +31,12 @@
 }
 
 
-#function {doCombat} {
+#alias {doCombat} {
 
 
 	#if {$needrest} {
 	
-		@fprintf{2;** doCombat:: -- Need rest - taking a break};
+		#showme {** doCombat:: -- Need rest - taking a break};
 		
 		#if {!$isrest} {
 
@@ -44,8 +44,6 @@
 			#var isrest {1}
 
 		};
-		
-		#return
 	};
 
 
@@ -53,58 +51,49 @@
 
 		#if {$havelist} {
 
-			@fprintf{3;** doCombat:: -- Have a list getting a target...};
-			@gettarget{};
+			#showme {** doCombat:: -- Have a list getting a target...};
+			gettarget{};
 			#var isfight {1};
 			kill $gottarget
 
 		};#else {
 
 			#var isfight {0};
-			#return
 		}
 
 		#if {$gottarget} {
 	
 			#send {kill $gottarget};
-			#var isfight {1};
-			#return
+			#var isfight {1}
 		};
 	};
-
-	#return
 }
 
 
-#function {gettarget} {
+#alias {gettarget} {
 
 
-
-	@fprintf{2;** doCombat:: -- CURRENT HP IS: $currenthp};
 
 	#if {$havelist} {
 
-		@fprintf{3;** doCombat:: -- CURRENT HITLIST: $hitlist};
-		@fprintf{2;** doCombat:: -- CHECKING TARGETS...};
+		#showme {** doCombat:: -- CHECKING TARGETS...};
 
 		#loop {&hitlist[]} {1} {gt_count} {
 
 			#if {$currenthp < $hitlist[$gt_count][2]} {
 
-				@fprintf{3;** doCombat:: -- REMOVING: $hitlist[$gt_count][1]  :::  HP REQUIRED WAS: $hitlist[$gt_count][2]};
+				#showme {** doCombat:: -- REMOVING: $hitlist[$gt_count][1]  :::  HP REQUIRED WAS: $hitlist[$gt_count][2]};
 
 				#list {hitlist} {delete} {$gt_count};				
 				#list {hitlist} {size} {size_list};
 
 				#if {$size_list} {
 
-					@fprintf{3;** doCombat:: -- NEW LIST: $hitlist}	
 
 				};#else {
 
-					@fprintf{2;** doCombat:: -- LIST EMPTY: NO TARGETS};
-					#var havelist {0};
-					#return
+					#showme {** doCombat:: -- LIST EMPTY: NO TARGETS};
+					#var havelist {0}
 				}
 
 			};	
@@ -113,7 +102,7 @@
 		}; 
 	
 
-		@fprintf{2;** doCombat:: -- GETTING TARGET FROM LIST...};
+		#showme {** doCombat:: -- GETTING TARGET FROM LIST...};
 
 		#list {hitlist} {size} {size_list};
 		
@@ -121,7 +110,7 @@
 
 			#math {gt_index} {1 d &hitlist[]};
 
-			@fprintf{2;** doCombat:: -- Random Target Selected: $hitlist[$gt_index][1]  HP Required: $hitlist[$gt_index][2]}; 
+			#showme {** doCombat:: -- Random Target Selected: $hitlist[$gt_index][1]  HP Required: $hitlist[$gt_index][2]}; 
 
 			#var gottarget {$hitlist[$gt_index][1]}
 
@@ -129,20 +118,17 @@
 
 			#var gottarget {$hitlist[1][1]};
 
-			@fprintf{2;** doCombat:: -- AQUIRED TARGET: $gottarget}
+			#showme {** doCombat:: -- AQUIRED TARGET: $gottarget};
 
-			#var chkCombat {0};
+			#var chkCombat {0}
 
 		}
 
 	};#else {
 
-		@fprintf{2;** doCombat::  -- HAVE NO LIST};
+		#showme {** doCombat::  -- HAVE NO LIST};
 		#bell
 	}
-
-	#return
-
 }
 
 #alias {addMobInfo} {

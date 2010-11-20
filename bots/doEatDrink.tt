@@ -9,7 +9,7 @@
   /* Can't find food or drink... stop the bot if it's running
    ***********************************************************/
 
-#acttion {^You can't seem to find it!} {
+#action {^You can't seem to find it!} {
 
 	#if {$botrunning} {
 
@@ -23,7 +23,7 @@
 	}
 }
 
-#act {^You can't find it!} {
+#action {^You can't find it!} {
 
 	#if {$botrunning} {
 
@@ -42,7 +42,7 @@
   /* doEatDrink function - called by pulse, depends on states hungry/thirsty
    ************************************************************************/
 
-#function doEatDrink {
+#alias doEatDrink {
 
 	#if {$ishungry} {
 		

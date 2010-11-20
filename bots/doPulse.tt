@@ -13,9 +13,9 @@
 	#if {$botrunning} {
 
 		#line {gag};
-		#if {$class_doMove_loaded} {@doMove{}};
-		#if {$class_doEatDrink_loaded} {@doEatDrink{}};
-		#if {$class_doCombat_loaded} {@doCombat{}};
+		#if {$class_doMove_loaded} {doMove};
+		#if {$class_doEatDrink_loaded} {doEatDrink};
+		#if {$class_doCombat_loaded} {doCombat};
 
 	};#else {
 
@@ -30,12 +30,12 @@
 /*
  *  doPulse function
  *
- *  This starts the pulse, args are delay in seconds:  @startloop{pulse_delay}
+ *  This starts the pulse, args are delay in seconds: doPulse <seconds>
  *
  ************************************************************************************/
 
 
-#function doPulse {
+#alias doPulse {
 	
 	#if {$botrunning} {
 
@@ -48,32 +48,27 @@
 			#showme {***PULSE***}
         	}{%1};
 
-		#var {botrunning} {1};
-		#return
+		#var {botrunning} {1}
 	}
 
-	#return
 }
 
 
 
 /*
- * doStopPulse function: stop the pulse, no args: @stoploop{}
+ * doStopPulse function: stop the pulse, no args: doStopPulse
  *
  ************************************************************************************/
 
-#function doStopPulse {
+#alias doStopPulse {
 
 	#if {$botrunning} {
 		#untick {pulse};
-		#var {botrunning} {0};
-		#return
+		#var {botrunning} {0}
 	};#else {
 		#bell;
 		#showme {** doPulse:: Bot not running: nothing to stop};	
 	}
-
-	#return
 }
 
 

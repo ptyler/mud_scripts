@@ -1,8 +1,6 @@
 #class {ccs.bot} kill
 #class {ccs.bot} open
 
-#class {stdio} {read} {stdio.tt}
-
  /* Important shit - class load checks etc.
   *****************************************************************************/
 
@@ -42,7 +40,7 @@
 
 	#if {$class_doPulse_loaded} {
 
-		@doPulse{3}
+		doPulse 3
 
 	};#else {
 
@@ -55,7 +53,7 @@
 
 	#if {$botrunning} {
 
-		@doStopPulse{}
+		doStopPulse
 
 	};#else {
 
@@ -77,47 +75,7 @@
 	load.doMove;
 	load.doEatDrink;
 	load.doCombat;
-	#class;
-
-	#if {$class_doPulse_loaded} {
-
-		@fprintf{1;** ccs.bot:: doPulse Loaded: Success}		
-	
-	};#else {
-	
-		#showme {** ccs.bot:: -- WARNING: doPulse does not appear to have loaded}
-	
-	};
-
-	#if {$class_doMove_loaded} {
-
-		@fprintf{1;** ccs.bot:: doMove Loaded: Success}
-
-	};#else {
-
-		#showme {** ccs.bot:: -- WARNING: doMove does not appear to have loaded}
-
-	};
-	
-	#if {$class_doEatDrink_loaded} {
-
-		@fprintf{1;** ccs.bot:: doEatDrink Loaded: Success}
-
-	};#else {
-
-		#showme {** ccs.bot:: -- WARNING: doEatDrink does not appear to have loaded}
-
-        };
-	
-	#if {$class_doCombat_loaded} {
-
-		@fprintf{1;** ccs.bot:: doCombat Loaded: Success}
-
-	};#else {
-
-		#showme {** ccs.bot:: -- WARNING: doCombat does not appear to have loaded}
-
-	}
+	#class
 }
 
 
