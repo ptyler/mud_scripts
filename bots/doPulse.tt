@@ -4,6 +4,26 @@
 
 #var botrunning {0}  /* check var for running/stopped pulse */
 
+/*
+ * trigger for pulse, what to check/do
+ *********************************************************/
+
+#action {***PULSE***} {
+	
+	#if {$botrunning} {
+
+		#line {gag};
+		#if {$class_doMove_loaded} {@doMove{}};
+		#if {$class_doEatDrink_loaded} {@doEatDrink{}}
+
+	};#else {
+
+		#bell;
+		#showme {** doPulse:: WARNING:: GOT PULSE: BOTRUNNING VAR NOT SET}
+
+	}
+}
+
 
 
 /*
@@ -15,12 +35,23 @@
 
 
 #function doPulse {
+	
+	#if {$botrunning} {
 
-        #ticker {pulse} {
-                #showme {***PULSE***}
-        }{%1};
-        #var {botrunning} {1};
-        #return
+		#bell;
+		#showme {** doPulse:: Bot already running: nothing to stop}
+
+	};#else {
+
+		#ticker {pulse} {
+			#showme {***PULSE***}
+        	}{%1};
+
+		#var {botrunning} {1};
+		#return
+	}
+
+	#return
 }
 
 
@@ -32,10 +63,18 @@
 
 #function doStopPulse {
 
-        #untick {pulse};
-        #var {botrunning} {0};
-        #return
+	#if {$botrunning} {
+		#untick {pulse};
+		#var {botrunning} {0};
+		#return
+	};#else {
+		#bell;
+		#showme {** doPulse:: Bot not running: nothing to stop};	
+	}
+
+	#return
 }
+
 
 #var class_doPulse_loaded {1}
 #class {doPulse.class} close

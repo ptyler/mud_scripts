@@ -1,18 +1,22 @@
 #class {doCombat} {kill}
 #class {doCombat} {open}
 
-#var currenthp {50}
 
-
-#var isfight {0}
-#var chkCombat {0}
-
+#var chkCombat {1}
 #var gottarget {self}
-
 #var havelist {0}
 #var hitlist {0}
-
 #var couldkill {0}
+
+
+#alias cleanlist {#list {hitlist} {clear};#var {havelist} {0}}
+#alias testlist {@addMobInfo{%1;%2;%3};#showme {$hitlist}}
+
+
+/* need to track real HP */
+
+/* Need to write doViolence to gettarget/kill the fucker, check on $chkCombat and $havelist, set on $isfight */ 
+
 
 
 /* This takes a list */
@@ -21,96 +25,95 @@
 
 
 
-	#showme {-- CURRENT HP IS: $currenthp};
-  	
-	#if {$havelist} {  /* is there a list?? */
+	@fprintf{2;** doCombat:: -- CURRENT HP IS: $currenthp};
 
-		#showme {-- CURRENT HITLIST: $hitlist};
-		#showme {\n-- CHECKING TARGETS:};
+	#if {$havelist} {
+
+		@fprintf{3;** doCombat:: -- CURRENT HITLIST: $hitlist};
+		@fprintf{2;** doCombat:: -- CHECKING TARGETS...};
 
 		#loop {&hitlist[]} {1} {gt_count} {
 
 			#if {$currenthp < $hitlist[$gt_count][2]} {
-				#showme {-- REMOVING: $hitlist[$gt_count][1]    HP REQUIRED WAS: $hitlist[$gt_count][2]};
-				#list {hitlist} {delete} {$gt_count};
-				
+
+				@fprintf{3;** doCombat:: -- REMOVING: $hitlist[$gt_count][1] HP REQUIRED WAS: $hitlist[$gt_count][2]};
+
+				#list {hitlist} {delete} {$gt_count};				
 				#list {hitlist} {size} {size_list};
+
 				#if {$size_list} {
 
-					#showme {-- NEW LIST: $hitlist}	
+					@fprintf{3;** doCombat:: -- NEW LIST: $hitlist}	
 
 				};#else {
 
-					#showme {-- LIST EMPTIED: NO TARGETS};
+					@fprintf{2;** doCombat:: -- LIST EMPTY: NO TARGETS};
 					#var havelist {0};
 					#return
 				}
 
 			};	
-	
-		
+
+
 		}; 
 	
 
-		#showme {\n-- GETTING TARGET FROM LIST:};
+		@fprintf{2;** doCombat:: -- GETTING TARGET FROM LIST...};
 
 		#list {hitlist} {size} {size_list};
 		
 		#if {$size_list > 1} {
 
 			#math {gt_index} {1 d &hitlist[]};
-			#showme {-- Random Target Selected: $hitlist[$gt_index][1]  HP REQUIRED: $hitlist[$gt_index][2]}; 
+
+			@fprintf{2;** doCombat:: -- Random Target Selected: $hitlist[$gt_index][1]  HP Required: $hitlist[$gt_index][2]}; 
+
 			#var gottarget {$hitlist[$gt_index][1]}
 
 		};#else {
 
 			#var gottarget {$hitlist[1][1]};
-			#showme {HAVE TARGET: $gottarget}
+
+			@fprintf{2;** doCombat:: -- AQUIRED TARGET: $gottarget}
+
+			#var chkCombat {1};
+			#list {hitlist} {clear};
+			#var havelist {0}
 		}
 
 	};#else {
 
-		#showme {-- NO LIST};
+		@fprintf{2;** doCombat::  -- HAVE NO LIST};
 		#bell
 	}
-	
+
 	#return
-	
+
 }
 
 #function {addMobInfo} {
 
 	#showme {List: $hitlist};
 	#showme {-- CORRELATING MOB INFORMATION:\nTarget Name: %1\nMin HP req: %2\nType: %3\n--------------};
-	
+
 	#math size_list {&hitlist[] + 1};
-	
+
 	#if {&hitlist[]} {
 
-		#list {hitlist[$size_list]} {add} {%1} {%2} {%3}
+		#list {hitlist[$size_list]} {add} {%1} {%2} {%3};
+		#var chkCombat {0} 
 
 	};#else {
 
 		#list {hitlist[1]} {add} {%1} {%2} {%3};
-		#var {havelist} {1}
+		#var {havelist} {1};
+		#var chkCombat {0}
 
 	};
 	#return
 }
 
 
-
-#alias cleanlist {#list {hitlist} {clear};#var {havelist} {0}}
-
-#alias testlist {@addMobInfo{%1;%2;%3};#showme {$hitlist}}
-
-#alias {n} {cleanlist;north}
-#alias {e} {cleanlist;east}
-#alias {s} {cleanlist;south}
-#alias {w} {cleanlist;west}
-#alias {u} {cleanlist;up}
-#alias {d} {cleanlist;down}
-#alias {l} {cleanlist;look}
 
 
 #var class_doCombat_loaded {1}

@@ -4,26 +4,38 @@
 
 #function doMove {
 
-        #switch {($isfight | $isrest | $issit | $issleep)} {
-                #case {0} {
-                        #echo {\n-- CAN MOVE: TRYING};
-                        #if {$botrunning} {
-                                #path walk forward;
-                        };
-                        #else {
-                                #echo {\n-- COULD NOT MOVE: botrunning=0}
-                        };
+	#switch {($isfight | $isrest | $issit | $issleep)} {
+
+		#case {0} {
+
+			@fprintf{2;** doMove:: -- CAN MOVE: TRYING};
+
+			#if {$botrunning} {
+
+				#path walk forward;
+
+			};#else {
+
+				#showme {** doMove:: *** WARNING: COULD NOT MOVE: botrunning not set: still got a pulse? ***}
+
+			};
+
 			#return
-                };
-                #case {1} {
-                        #echo {\n-- CANNOT MOVE: EXITING};
-                        #echo {\n-- Variables set -  Fighting: $isfight Rest: $isrest Sit: $issit Sleep: $issleep};
-                        #return
-                };
-                #default {
-                        #return
-                }
-        }
+		};
+                
+		#case {1} {
+			
+			@fprintf{2;** doMove:: -- CANNOT MOVE: EXITING};
+			@fprintf{3;** doMove:: -- Variables set::  Fighting: $isfight Rest: $isrest Sit: $issit Sleep: $issleep};
+
+			#return
+		};
+
+		#default {
+	
+			#return
+		}
+	}
 }
 
 

@@ -1,57 +1,64 @@
 #class {doEatDrink} kill
 #class {doEatDrink} open
 
- 
-  /* General variabless and actions related to doEatDrink (some default)
-   ***********************************************************************/
 
-#var isthirsty {0}
-#var ishungry {0}
-#var food {ham}
-#var drink {water} /*no shit... but maybe there is other stuff to drink*/
-
-
-#act {^You are hungry.} {#var {ishungry} {1}}
-#act {^You are thirsty.} {#var {isthirsty} {1}}
+#action {^You are hungry.} {#var {ishungry} {1}}
+#action {^You are thirsty.} {#var {isthirsty} {1}}
 
  
   /* Can't find food or drink... stop the bot if it's running
    ***********************************************************/
 
-#act {^You can't seem to find it!} {
+#acttion {^You can't seem to find it!} {
+
 	#if {$botrunning} {
+
 		pstop;
-		#echo {\n-- OUT OF FOOD/WATER OR ITS NOT SET PROPERLY... ASSHOLE\n};
-		#bell /* lets get some attention!! */
+		#showme {** doEatDrink:: -- OUT OF FOOD/WATER OR ITS NOT SET PROPERLY... ASSHOLE};
+		#bell
+
 	};#else {
-		#bell /* Just a reminder... pals */	
+
+		#bell
 	}
 }
 
 #act {^You can't find it!} {
+
 	#if {$botrunning} {
+
 		pstop;
-		#echo {\n-- OUT OF FOOD/WATER OR ITS NOT SET PROPERLY... ASSHOLE\n};
-		#bell /* lets get some attention!! */  
+		#showme {** doEatDrink:: -- OUT OF FOOD/WATER OR ITS NOT SET PROPERLY... ASSHOLE};
+		#bell
+
 	};#else {
-		#bell /* Just a reminder... pals */
+
+		#bell
 	}
 }
 
 
 
-  /* doEatDrink function - no args atm
-   **********************************************/
+  /* doEatDrink function - called by pulse, depends on states hungry/thirsty
+   ************************************************************************/
 
 #function doEatDrink {
+
 	#if {$ishungry} {
-		get $food $container;
+		
+		#if {$container} {
+			get $food $container;
+		};
 		eat $food;
-		#var ishungry {0}  /* don't worry, if we don't eat, the bot stops and will tell you */
+		#var ishungry {0}
+
 	};
+
 	#if {$isthirsty} {
+
 		drink $drink;
 		#var isthirsty {0}
+
 	};
 }
 
