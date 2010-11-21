@@ -170,10 +170,14 @@
   #showme {<049>'--------------------------------------'<099>};
 }
 
+#alias {system_message} /* %1 = short name, %2 extra, %3 end */
+{
+  #showme <049>-<039>:<049>><069>%1<049><<039>:<049>-<149><069> %2: %3<099>
+}
 
 /* need at least 1 score output to populate variables */
 score
-#delay 1 #showme <049>-:><069>LOADED<049><:- <069>Basic module.  Type basic.help for help<099>
+#delay 1 system_message {LOADED} {Basic module} {Type basic.help for help}
 
 #class {basic} {close}
 
