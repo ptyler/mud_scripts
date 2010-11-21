@@ -13,6 +13,20 @@
 #alias cleanlist {#list {hitlist} {clear};#var {havelist} {0}}
 #alias testlist {@addMobInfo{%1;%2;%3};#showme {$hitlist}}
 
+#act {^%+ leaves %+.} {
+
+	cleanlist;
+	#var havelist {0};
+	#send {look}
+}
+
+#act {^%+ arrives from the %+.} {
+
+	cleanlist;
+	#var havelist {0};
+	#send {look}
+}
+
 #act {^%1 is dead! R.I.P.} {
 
 	#var isfight 0;
@@ -78,7 +92,6 @@
 		}
 	};
 }
-
 
 #alias {gettarget} {
 
