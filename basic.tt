@@ -25,7 +25,7 @@
 /*
  * default actions?
  *****************************************************************************/
-
+#macro {OP} {#sess arctic mud.arctic.org 2700}
 #split
 
 #act {^You raise a level!} {score}
