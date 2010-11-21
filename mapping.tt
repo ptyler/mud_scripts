@@ -6,6 +6,7 @@
  ******************************************************************************/
 
 #var {mapping} {0}
+#var {mapname} {}
 
 #action {^Alas, you cannot go that way...}
 {
@@ -15,7 +16,13 @@
   }
 }
 
-/* #act {^Your mount refuses to move there.} {#map undo} */
+#act {^Your mount refuses to move there.}
+{
+  #if {$mapping==1}
+  {
+    #map undo
+  }
+}
 
 #alias {mapoff}
 {
@@ -36,47 +43,57 @@
   }
 }
 
-#alias {mapname}  {#var mapname {%1}}
+#alias {mapname}  
+{
+  #var mapname {%1};
+  system_message {mapname} {set to} {%1}
+}
 #alias {roomname} {#map name %1}
 #alias {roomsym}  {#map set roomsymbol %1}
 #alias {mblue}    {#map set roomcolor <049>}
 #alias {myellow}  {#map set roomcolor <039>}
 #alias {mgreen}   {#map set roomcolor <029>}
 #alias {mpurp}    {#map set roomcolor <059>}
-#alias {save.map} {#map write maps/$mapname}
+#alias {save.map} 
+{
+  #map write maps/$mapname;
+  system_message save.map {saved map} $mapname
+}
 #alias {load.map}
 {
-  #map read maps/%1
+  mapname %1;
+  #map read maps/%1;
+  system_message {load.map} {loaded map} {balifor}
 }
 
 #alias {mapping.help}
 {
-  #showme {<039>,--------------------------------------,};
-  #showme {<039>| Chip & Chap Mapping Module           |};
-  #showme {<039>'--------------------------------------'};
-  #showme {<039>,--------------------------------------,};
-  #showme {<039>| You set the following:               |};
-  #showme {<039>|                                      |};
-  #showme {<039>|   roomname <name for #map run>       |};
-  #showme {<039>|   roomsym <3 chars to display>       |};
-  #showme {<039>|                                      |};
-  #showme {<039>|   mblue   #set room to blue>         |};
-  #showme {<039>|   myellow                            |};
-  #showme {<039>|   mgreen                             |};
-  #showme {<039>|   mpurp                              |};
-  #showme {<039>|                                      |};
-  #showme {<039>|   mapon  # turn automapper on        |};
-  #showme {<039>|   mapoff # turn it off               |};
-  #showme {<039>|                                      |};
-  #showme {<039>|   mapname <map name>                 |};
-  #showme {<039>|   load.map <map name>                |};
-  #showme {<039>|   save.map                           |};
-  #showme {<039>|   mapping.help                       |};
-  #showme {<039>'--------------------------------------'<099>};
+  #showme {<049>,--------------------------------------,};
+  #showme {<049>|<079>      Chip & Chap Mapping Module      <049>|};
+  #showme {<049>'--------------------------------------'};
+  #showme {<049>,--------------------------------------,};
+  #showme {<049>|<079> You set the following:               <049>|};
+  #showme {<049>|<079>                                      <049>|};
+  #showme {<049>|<079>   roomname <name for #map run>       <049>|};
+  #showme {<049>|<079>   roomsym <3 chars to display>       <049>|};
+  #showme {<049>|<079>                                      <049>|};
+  #showme {<049>|<079>   mblue   #set room to blue>         <049>|};
+  #showme {<049>|<079>   myellow                            <049>|};
+  #showme {<049>|<079>   mgreen                             <049>|};
+  #showme {<049>|<079>   mpurp                              <049>|};
+  #showme {<049>|<079>                                      <049>|};
+  #showme {<049>|<079>   mapon  # turn automapper on        <049>|};
+  #showme {<049>|<079>   mapoff # turn it off               <049>|};
+  #showme {<049>|<079>                                      <049>|};
+  #showme {<049>|<079>   mapname  <map name>                <049>|};
+  #showme {<049>|<079>   load.map <map name>                <049>|};
+  #showme {<049>|<079>   save.map                           <049>|};
+  #showme {<049>|<079>   mapping.help                       <049>|};
+  #showme {<049>'--------------------------------------'<099>};
 }
 
 
-#delay 1 mapping.help
+#delay 1 system_message {LOADED} {Mapping module} {Type mapping.help for help}
 
 #class {mapping} {close}
 
