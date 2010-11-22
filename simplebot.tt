@@ -4,6 +4,7 @@
 #act {^%1 attempts to flee.} {#var inbattle 0}
 #act {^They aren't here.}  {#var inbattle 0}
 #act {^#END OF PATH.} {#path load tarsis_park}
+#act {^You couldn't find what you were looking for.} {#var inbattle 0}
 
 #alias {fight}
 {
@@ -11,6 +12,7 @@
   #if { $hp > $resthp && !$inbattle && !$resting && !$sleeping }
   {
     #var {inbattle} {1};
+    hide;
     backstab %1
   }
 }
@@ -25,6 +27,7 @@
   };
   #elseif { !$resting && !$inbattle }
   {
+    sneak;
     #path walk forward
   };
 }
