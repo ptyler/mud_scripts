@@ -1,7 +1,0 @@
-#class {name} kill
-#class {name} open
-
-/* put scripts here */
-
-
-#class {name} close
