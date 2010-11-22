@@ -36,7 +36,7 @@
 {
   #if { $grouped }
   {
-    #split %1
+    split %1
   }
 }
 
@@ -72,8 +72,7 @@
   #var earned_xp {%3};
   #if {$hp <= $resthp || $mp < $restmp }
   {
-    #var ineedtorest 1
-    #var restedup 0
+    #var ineedtorest 1;
   };
   #elseif {$hp == $maxhp && $mp == $maxmp}
   {
@@ -94,10 +93,21 @@
 #act {^You throw a leg over the beast, and slide off its side.} {#var mounted 0}
 #act {^You no longer ride %1} {#var mounted 0}
 #act {^You sit down and rest your tired bones.} {#var resting 1}
+#act {^You sit down.} {#var sitting 1}
+#act {^You go to sleep.} 
+{
+  #var sleeping 1; 
+  #var sitting 1
+}
 #act {^You stand up.}
 {
   #var resting 0;
   #var sitting 0;
+}
+
+#act {^You wake, and sit up.}
+{
+  #var sleeping 0
 }
 
 /*
@@ -140,7 +150,7 @@
 #high {^%1 tells your group '%2} {<049>}
 #high {^You tell %1 '%2} {<039>}
 #high {^#10 SECONDS %1} {<039>}
-#sub {~^%1H %2V %3} {%1/${maxhp}H %2/${maxmp}V %3}
+#sub {~^%1H %2V %3} {\n%1/${maxhp}H %2/${maxmp}V %3}
 #sub {^You feel enlightened.} {<049>-:><039>skill up!<049><:- <039>You feel enlightened<099>}
 #sub {^You feel especially skillful today.} {<049>-:><039>skill up!<049><:- <039>You feel especially skillful today.<099>}
 
