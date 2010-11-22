@@ -1,0 +1,43 @@
+#class {doMove} kill
+#class {doMove} open
+
+
+#alias doMove {
+
+
+	doCombat;
+
+	#switch {($isfight | $isrest | $issit | $issleep | $chkCombat)} {
+
+		#case {0} {
+
+			#showme {** doMove:: -- CAN MOVE: TRYING};
+
+			#if {$botrunning} {
+	
+				cleanlist;
+				#path walk forward
+				
+			};#else {
+
+				#showme {** doMove:: *** WARNING: COULD NOT MOVE: botrunning not set: still got a pulse? ***}
+
+			}
+
+		};                
+		#case {1} {
+			
+			#showme {** doMove:: -- CANNOT MOVE: EXITING};
+			#showme {** doMove:: -- Variables set::  Fighting: $isfight Rest: $isrest Sit: $issit Sleep: $issleep Listing: $chkCombat};
+
+		};
+
+		#default {#NOP}
+	}
+
+	
+}
+
+
+#var class_doMove_loaded {1}
+#class {doMove} close

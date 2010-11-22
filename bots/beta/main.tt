@@ -1,0 +1,134 @@
+#class {basic} {kill}
+#class {basic} {open}
+
+
+/*
+ * Basics relative to all characters
+ ******************************************************************************/
+
+#split
+
+
+#var {mounted} {0}
+#var {inbattle} {0}
+#var {sitting} {0}
+#var {resting} {0}
+#var {sleeping} {0}
+#var {assisting} {0}
+#var {container} {pack}
+#var {food} {food}
+#var {autoloot} {0}
+#var {mounted} {0}
+#var {mapping} {0}
+
+/* variable captures */
+
+#act {^You have %1(%2) hit and %3(%4) movement points.}
+{
+  #var hp {%1};
+  #var maxhp {%2};
+  #var mp {%3};
+  #var maxmp {%4}
+}
+
+#act {You have scored %1 exp, and have %2(%3) steel coins.}
+{
+  #var earned_xp {%1};
+  #var coins {%2};
+  #var bankc {%3}
+}
+
+
+#action {^Alas, you cannot go that way...}
+{
+  #if {$mapping==1}
+  {
+    #map undo
+  }
+}
+
+#act {^You are hungry.} { get $food $container; eat $food }
+#act {^You are thirsty.} { drink water }
+#act {^There were %1 coins.} { split %1 }
+#act {^You now ride a %1} {#var mounted {1}}
+#act {^You no longer ride %1} {#var mounted {0}}
+
+#act {^%1 is dead! R.I.P.}
+{
+  #var inbattle 0;
+  exa corpse;
+  #if {$autoloot == 1}
+  {
+    get all corpse
+  }
+}
+
+#alias {roomname} {#map name %1}
+#alias {roomsym}  {#map set roomsymbol %1}
+#alias {mblue}    {#map set roomcolor <049>}
+#alias {myellow}  {#map set roomcolor <039>}
+#alias {mgreen}   {#map set roomcolor <029>}
+#alias {mpurp}    {#map set roomcolor <059>}
+
+#alias {mapoff}
+{
+  #if {$mapping==1}
+  {
+    #variable mapping 0;
+    #map flag static on;
+    #showme {#MAPPING disabled}};
+}
+
+#alias {mapon}
+{
+  #if {$mapping==0}
+  {
+    #variable mapping 1;
+    #map flag static off;
+    #showme {#MAPPING enabled}
+  }
+}
+
+#alias {setfood}  {#var food {%1}}
+#alias {setbag}   {#var container {%1}}
+#alias {rl}       {#read basic.tt}
+#alias {autoloot} {#var autoloot {%1}; #showme {autoloot set to: %1}}
+#alias {synctick}
+{
+  #unticker {ticky};
+  #ticker {ticky}
+  {
+    #showme #TICK!!;
+    #delay {50} {#showme #10 SECONDS UNTIL TICK!!}
+  } {60}
+}
+
+#tick {idle} {#cr} {300}
+
+#high {^%1 tells your group '%2} {<049>}
+#high {^You tell %1 '%2} {<039>}
+#high {^#10 SECONDS %1} {<039>}
+
+#class {basic} {close}
+
+
+#alias {basic_help}
+{
+  #showme {<039>You must run: setfood <food name>}
+  #showme {<039>You must run: setbag  <container type>}
+}
+
+
+basic_help
+
+
+
+
+
+
+
+
+
+
+
+

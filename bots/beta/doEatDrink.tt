@@ -1,0 +1,67 @@
+#class {doEatDrink} kill
+#class {doEatDrink} open
+
+
+#action {^You are hungry.} {#var {ishungry} {1}}
+#action {^You are thirsty.} {#var {isthirsty} {1}}
+
+ 
+  /* Can't find food or drink... stop the bot if it's running
+   ***********************************************************/
+
+#action {^You can't seem to find it!} {
+
+	#if {$botrunning} {
+
+		pstop;
+		#showme {** doEatDrink:: -- OUT OF FOOD/WATER OR ITS NOT SET PROPERLY... ASSHOLE};
+		#bell
+
+	};#else {
+
+		#bell
+	}
+}
+
+#action {^You can't find it!} {
+
+	#if {$botrunning} {
+
+		pstop;
+		#showme {** doEatDrink:: -- OUT OF FOOD/WATER OR ITS NOT SET PROPERLY... ASSHOLE};
+		#bell
+
+	};#else {
+
+		#bell
+	}
+}
+
+
+
+  /* doEatDrink function - called by pulse, depends on states hungry/thirsty
+   ************************************************************************/
+
+#alias doEatDrink {
+
+	#if {$ishungry} {
+		
+		#if {$container} {
+			get $food $container;
+		};
+		eat $food;
+		#var ishungry {0}
+
+	};
+
+	#if {$isthirsty} {
+
+		drink $drink;
+		#var isthirsty {0}
+
+	};
+}
+
+
+#var class_doEatDrink_loaded {1}
+#class {doEatDrink} close
