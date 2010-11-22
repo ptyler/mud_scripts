@@ -1,41 +1,55 @@
 #class {paladin} kill
 #class {paladin} open
 
+
+
+#act {^You are sent sprawling %1} { stand }
+#act {^You fumble and drop %1} { get silver.sword; wield silver.sword }
+#act {^Your studies complete, you close %1} { synctick }
+#act {^Your hands tingle as a feeling of goodness fills you.} {}
+
 #act {^The gods will grant you audience through prayer again,%1} 
 {
-  #list spellqueue add {beseech paladine};
+  #list abilityqueue add {beseech paladine};
 }
 
 #act {^The radiance surrounding you fades away.} 
 { 
   #list spellqueue add {'aura of glory'};
 }
-#act {^You are sent sprawling %1} { stand }
+
 #act {^You feel less powerful.} 
 { 
   #list spellqueue add {'holy arms'};
 }
+
 #act {^You feel less righteous.} 
 { 
-  #list spellqueue {'bless' me};
+  #list spellqueue add {'bless' me};
 }
-#act {^You fumble and drop %1} { get silver.sword; wield silver.sword }
-
-#act {^Your studies complete, you close %1} { synctick }
-
-#act {^Your hands tingle as a feeling of goodness fills you.} {}
 
 /* cast me tick */
+
 #tick {recast}
 {
   #math sqc {&spellqueue[]};
+  #math aqc {&abilityqueue[]};
   #if { $sqc && !$resting && !$sleeping && !$mounted }
   {
     system_message {recasting} {$spellqueue[1]};
     cast $spellqueue[1];
     #list spellqueue del 1
+  };
+  #elseif { $aqc && !$resting && !$sleeping && !$mounted }
+  {
+    system_message {performing} {$abilityqueue[1]};
+    $abilityqueue[1];
+    #list abilityqueue del 1
   }
+
 } {2.5}
+
+
 
 /* load message */
 
