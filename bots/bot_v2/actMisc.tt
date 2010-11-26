@@ -1,0 +1,12 @@
+#class {actMisc} {kill}
+#class {actMisc} {open}
+
+/* General shit we should do
+ ****************************************/
+
+#act {A pile of steel coins.} {
+	#send {get coins}
+}
+
+
+#class {actMisc} {close}

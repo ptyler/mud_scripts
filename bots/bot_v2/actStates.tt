@@ -1,0 +1,130 @@
+#class {actStates} {kill}
+#class {actStates} {open}
+
+
+/* #act {That's some fast typing. Better take a break.} {#nop} --  maybe stop the bot, something wrong? not sure yet */
+
+
+
+/* Informational
+ *************************************************************/
+
+
+#act {^%1H %2V %3X %5} {
+
+	#var currenthp {%1};
+	#var currentmp {%2};
+
+	#if {$currenthp <= $minhp || $currentmp < $minmp } {
+		#var needrest 1
+	};#elseif {$currenthp == $resttohp && $currentmp == $resttomp} {
+		#var needrest 0
+	}
+}
+
+#act {^You have %1(%2) hit and %3(%4) movement points.}
+{
+	#var currenthp {%1};
+	#var maxhp {%2};
+	#var currentmp {%3};
+	#var maxmp {%4};
+	#math {minhp} {$maxhp * $hp_restat_mul};
+	#math {minmp} {$maxmp * $hp_restat_mul};
+	#math {resttohp} {$maxhp * $hp_restto_mul};
+	#math {resttomp} {$maxmp * $hp_restto_mul}
+
+}
+
+
+/* Minor states
+ **************************************************************/
+
+#act {^You now ride a %1} {@setstate{ismount}}
+#act {^You swing into the saddle} {@setstate{ismount}}
+#act {^You throw a leg over the beast, and slide off its side.} {@setstate{isstand}}
+#act {^You no longer ride %1} {@setstate{isstand}}
+
+#act {^You sit down and rest your tired bones.} {@setstate{isrest}}
+#act {^You stop resting, and sit up.} {@setstate{issit}}
+#act {^You stop resting, and stand up.} {@setstate{isstand}}
+#act {^You stand up.} {@setstate{isstand}}
+
+#act {^Shhh! This is a cool dream!} {@setstate{issleep}}
+#act {^You go to sleep.} {@setstate{issleep}}
+#act {^You wake, and sit up.} {@setstate{issit}}
+#act {^You awaken, and sit up.} {@setstate{issit}}
+
+/* These states come from score
+ *************************************************************/
+
+#act {^You are sitting.} {@setstate{issit}};
+#act {^You are resting.} {@setstate{isrest}}
+#act {^You are sleeping.} {@setstate{issleep}}
+#act {^You are standing.} {@setstate{isstand}}
+
+#act {^You are fighting %*} {#var isfight 1}
+
+
+#function {setstate} {
+
+
+	#switch {"%1"} {
+		#case {"issit"} {
+
+			#var issit {1};
+			#var istand {0};
+			#var isrest {0};
+			#var issleep {0};
+			#var ismount {0};
+
+		};
+
+		#case {"isstand"} {
+
+			#var issit {0};
+			#var istand {1};
+			#var isrest {0};
+			#var issleep {0};
+			#var ismount {0};
+
+		};
+		#case {"isrest"} {
+
+			#var issit {0};
+			#var istand {0};
+			#var isrest {1};
+			#var issleep {0};
+			#var ismount {0};
+
+		};
+		#case {"issleep"} {
+
+			#var issit {0};
+			#var istand {0};
+			#var isrest {0};
+			#var issleep {1};
+			#var ismount {0};
+
+		};
+		#case {"ismount"} {
+
+			#var issit {0};
+			#var istand {0};
+			#var isrest {0};
+			#var issleep {0};
+			#var ismount {1};
+
+		};
+		#default {
+
+			#showme {** actStates:: setstate{} -- nothing to set, check argument}
+
+		};
+
+	};
+	#return #nop
+}
+
+
+
+#class {actStates} {close}

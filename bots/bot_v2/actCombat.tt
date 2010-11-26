@@ -1,0 +1,46 @@
+#class {actCombat} {kill}
+#class {actCombat} {open}
+
+#act {^%* disarms your weapon.} {
+	#send {get $weapons[primary]};
+	#send {wield $weapons[primary]}
+}
+
+#act {^%* panics, and attempts to flee} {
+	#var isfight {0}
+}
+
+#act {^%* kick knocks you back a few feet and you fall to the ground} {#send {stand}} 
+#act {^You are sent sprawling as %1 crashes into you.} {#send {stand}}
+#act {^You can't do that while sitting.} {#send {stand}}
+#act {^You try to bash %*} {#send {stand}}
+#act {^You try to sweep %*} {#send {stand}}
+
+
+
+#act {^You {miss|bludgeon|slash|pierce|bruise|barely|hit} %1 %2} {
+
+	#if {!$isfight && ("%1" != "feel")} {
+		#var isfight 1
+	};
+
+	#showme {*** COMBAT ROUND ***}
+}
+
+
+#act {^%1 is dead! R.I.P.} {
+
+	#var isfight 0;
+	#if {$autoloot} {
+		#send {get all.coins corpse};
+	};
+}
+
+/* More death triggers: 
+ *
+ * You receive %1 experience.
+ * The death cry of %* echoes from somewhere nearby...
+ * 
+ */
+
+#class {actCombat} {close}

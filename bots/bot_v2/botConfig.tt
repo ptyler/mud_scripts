@@ -1,0 +1,119 @@
+#class {botConfig.save} kill
+#class {botConfig.save} open
+
+/* botConfig.save class
+ *
+ * Contains general configuration -- can be saved
+ *******************************************************/
+ 
+
+
+/* Physical */
+
+#var hp_restto_mul {0.80}		/* Percentage at which we will stop resting */
+#var hp_restat_mul {0.33}
+
+#var mp_restto_mul {0.80}		/* Percentage at which we will stop resting */
+#var mp_restat_mul {0.33} 
+
+
+/* Equipment */
+
+#var packs_bags {{1}{name}{qty}{0}{2}{name.2}{qty}{0}}
+#var container_drink {{name}{skin}{qty}{1}}
+#var food_drink {{food}{bread}{drink}{water}}
+#var weapons {{primary}{sword}{offhand}{0}}
+#var lightsource {{name}{lantern}{slot}{held}}
+#var coins {{pockets}{0}{bank}{0}}
+
+
+/* Special/Modes */
+
+#var autoloot {1}
+
+
+#class {botConfig.save} close
+
+/*-----------------------------------------------------------------------------------------------*/
+
+#class {botConfig} kill
+#class {botConfig} open
+
+
+/* botConfig:
+ *
+ * Contains alias for configuration/saving/Menu etc.
+ *****************************************************/
+
+
+#alias {config.save} {
+
+	#class {botConfig.save} open;
+	#unvar result;
+	#class {botConfig.save} close;
+
+	#class {botConfig.save} {write} {saved/saved.botConfig};
+
+	#echo {** Bot config has been saved!}
+	
+}
+
+
+
+#alias setfood {
+
+	#class {botConfig.save} {open};
+
+	#var food_drink[food] %1;
+
+	#class {botConfig.save} {close};
+
+	#echo {** SETFOOD: %1}
+
+}
+
+#alias setdrink {
+
+	#class {botConfig.save} {open};
+
+	#var food_drink[drink] %1;
+
+	#class {botConfig.save} {close};
+
+	#echo {** SETDRINK: %1}
+}
+
+#alias setdrink.from {
+
+	#class {botConfig.save} {open};
+
+	#var container_drink[name] %1;
+
+	#class {botConfig.save} {close};
+
+	#echo {** SETDRINK - Container: %1} 
+
+}
+
+#alias autoloot {
+
+	#class {botConfig.save} {open};
+
+	#switch {"%1"} {
+		#case {"on"} {
+			#var autoloot {1};
+			#echo {** AUTOLOOT: on}	
+		};
+		#case {"off"} {
+			#var autoloot {0};
+			#echo {** AUTOLOOT: off}
+		};
+		#default {
+
+			#echo {** AUTOLOOT:  Usage -- "autoloot [on|off]"}
+		}
+	};
+	#class {botConfig.save} {close}
+}
+
+#class {botConfig} close

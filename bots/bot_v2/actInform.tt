@@ -1,0 +1,62 @@
+#class {actInform} {kill}
+#class {actInform} {open}
+
+
+/* Informative triggers
+ *************************************/
+
+#act {^You raise a level!} {score}
+#act {^There were %1 coins.} {#nop}
+
+
+#act {You have scored %1 exp, and have %2(%3) steel coins.} {
+
+	#var coins[pockets] {%2};
+	#var coins[bank] {%3}
+}
+
+#act {^It is %1 o'clock %2} {
+
+	#if {"%2" == "am"} {
+		#var night_day[day] 1;
+		#var night_day[night] 0
+	};#else {
+		#var night_day[night] 1;
+		#var night_day[day] 0
+	}
+}
+
+/*
+ * The rising sun proclaims a new day.
+ *
+ */
+
+
+/* Room changes
+ ***************************************/
+
+/* cyan general room titles*/
+
+#act {~^\e[36m%+\e[0;37m} {
+
+	#showme {*** ROOM UPDATE ***}
+}
+
+/* purple guilds/shit room titles*/
+
+#act {~^\e[35m%+\e[0;37m} { 
+
+	#showme {*** ROOM UPDATE **} 
+}
+
+
+/* Action on information
+ ***************************************/
+
+#act {^*** ROOM UPDATE***} {#showme {** actInform:: Got room update}}
+#act {^*** COMBAT ROUND ***} {#showme {** actInform:: Got round of combat complete}}
+#act {^*** COMMAND COMPLETED ***} {#showme {** actInform:: Got command completed}}
+
+
+
+#class {actInform} {close}

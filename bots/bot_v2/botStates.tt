@@ -1,0 +1,41 @@
+#class {botStates} kill
+#class {botStates} open
+
+/* botStates.tt:
+ *
+ * Contains general  variables/states
+ *******************************************************/
+ 
+
+/* Combat */
+
+#var isfight {0}		       	/* Am I fighting? */
+#var chk_combat {0}			/* Should try to fight, have something */
+
+
+/* Physical */
+
+#var currenthp {0}
+#var currentmp {0}
+
+#var maxhp {0}				/* Total HP */
+#var minhp {0}				/* Min HP before rest attempt */
+
+#var maxmp {0}				/* Total move points */
+#var minmp {0}				/* Min move points before rest attempt */
+
+#var needrest {0}
+#var isrest {0}
+#var isstand {1}			/* By default, you are standing... unless you fall out of the fuckin inn */
+#var issit {0}
+#var issleep {0}
+#var ismount {0}
+#var isfly {0}
+
+
+/* Environment */
+
+#var night_day {{day}{0}{night}{0}}
+
+
+#class {botStates} close
