@@ -1,0 +1,9 @@
+#act {^A fluffy white bunny hops about here.} {fight bunny}
+#act {^A furry grey squirrel looks around for nuts.} {fight squirrel}
+#act {^A baby bird hops about here.} {fight bird}
+#act {^A young deer moves about the forest.} {fight deer}
+#act {^A small red fox is up to no good here.} {fight fox}
+/* 
+#act {^A grizzly bear lumbers about here.} {fight bear}
+#act {^A monkey is here, jumping up and down while screeching loudly.} {fight monkey}
+*/
