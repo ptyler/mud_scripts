@@ -1,21 +1,13 @@
 #class {ccs.bot} kill
 #class {ccs.bot} open
 
-
  /* Important shit - class load checks etc.
   *****************************************************************************/
 
 #var class_doMove_loaded {0}
 #var class_doEatDrink_loaded {0}
 #var class_doPulse_loaded {0}
-
-
-#action {***PULSE***} {
-	#line {gag};
-	#if {$class_doMove_loaded} {@doMove{}};
-	#if {$class_doEatDrink_loaded} {@doEatDrink{}}
-}
-
+#var class_doCombat_loaded {0}
 
  
  /* Major variables - state/check related
@@ -27,18 +19,16 @@
 #variable issleep {0}
 #variable ishungry {0}
 #variable isthirsty {0}
+#variable needrest {0}
 
 
  /* Minor variables - maybe dupes in classes
   ********************************************/
 
-#variable container {grocerybag}
+#variable container {0}
+
 #variable food {ham}
 #variable drink {water}
-
-
-#var {testpath} {s;s;s;n;n;n}
-
 
 
 
@@ -47,51 +37,100 @@
 
 
 #alias {pstart} {
+
 	#if {$class_doPulse_loaded} {
-		@doPulse{3}
+
+		doPulse 4
+
 	};#else {
+
 		#bell;
-		#echo {\n-- START WHAT??? LOAD IT FIRST\n}
+		#showme {** ccs.bot:: -- START WHAT??? LOAD BOT OR doPulse.tt FIRST!!}
 	}
 }
 
 #alias {pstop} {
+
 	#if {$botrunning} {
-		@doStopPulse{}
+
+		doStopPulse
+
 	};#else {
+
 		#bell;
-		#echo {\n-- PULSE NOT RUNNING: nothing to stop\n}	
+		#showme {** ccs.bot:: -- PULSE NOT RUNNING: nothing to stop}	
 	}
 }
 
 
-#alias {load.doMove} {#class {doMove.class} {read} {doMove.class};#class}
-#alias {load.doPulse} {#class {doPulse.class} {read} {doPulse.class};#class}
-#alias {load.doEatDrink} {#class {doEatDrink.class} {read} {doEatDrink.class};#class}
+
+#alias {load.doMove} {#class {doMove.tt} {read} {doMove.class}}
+#alias {load.doPulse} {#class {doPulse.tt} {read} {doPulse.class}}
+#alias {load.doEatDrink} {#class {doEatDrink.tt} {read} {doEatDrink.class}}
+#alias {load.doCombat} {#class {doCombat.tt} {read} {doEatDrink.class}}
+
+#alias {load.bot} {
+
+	load.doPulse;
+	load.doMove;
+	load.doEatDrink;
+	load.doCombat;
+	#class
+}
+
 
 
  /*  minor alias'
   ****************************************/
 
-#alias {setfood} {#var food %0;#showme {--FOOD SET: $food}}
-#alias {setdrink} {#var drink %0;#showme {--DRINK SET: $drink}}
+#alias {set.food} {#var food %1;#showme {** ccs.bot:: -- FOOD SET: $food}}
+#alias {set.drink} {#var drink %1;#showme {** ccs.bot:: -- DRINK SET: $drink}}
+#alias {set.container} {#var container %1;showme {** ccs.bot:: -- CONTAINER SET: $container}}
+
+#alias {load.doMove} {#class {doMove} {read} {doMove.tt}}
+#alias {load.doPulse} {#class {doPulse} {read} {doPulse.tt}}
+#alias {load.doEatDrink} {#class {doEatDrink} {read} {doEatDrink.tt}}
+#alias {load.doCombat} {#class {doCombat} {read} {doCombat.tt}}
 
 
- 
- /*  test related shit
-  ****************************************/
+ /* Core actions - STOLEN FROM CHIP!! BwHAhAha!!
+  *********************************************************/
 
-#action {^#END OF PATH} {loadtestp}
-#alias loadtestp {#path load testpath;#echo {--PARK LOADED}}
+#act {^You have %1(%2) hit and %3(%4) movement points.} {
 
+	#var currenthp {%1};
+	#var maxhp {%2};
+	#var currentmp {%3};
+	#var maxmp {%4};
+	#math {resthp} {$maxhp * 0.75}
+	#math {restmp} {$maxmp * 0.3333}
 
+}
 
+#act {^%1H %2V %3X %5} {
 
+	#var currenthp {%1};
+	#var currentmp {%2};
+	#var earned_xp {%3};
 
+	#if {$currenthp <= $resthp} {
 
+		#var needrest 1
 
-  /* help down here
-   ****************************/
+	}; #else {
+
+		#var needrest 0;
+
+		#if {$isrest} {
+
+			#send {stand}
+			#var isrest {0};
+		}	
+	}
+}
+
+ /* help down here
+  ****************************/
 
 #alias ccshelp {
 

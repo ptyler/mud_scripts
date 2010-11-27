@@ -1,0 +1,19 @@
+#var testloop {0}
+
+#action {TestLoop: 12} {#var testloop {20};#showme {STOPPED BY ME!!}}
+
+#function {test} {
+
+	#if {$testloop == 2} {
+		#showme {-- DONE LOOP};
+		#var testloop {0}
+	};#else {
+		#math {testloop} {$testloop + 1};
+		#showme {-- TestLoop: $testloop};
+		#delay {0.5} {@test{}}
+	}
+	#return
+}
+
+
+

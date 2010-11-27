@@ -1,0 +1,133 @@
+What the fuck is new... 
+
+New concept, beta is over. 
+
+New bot is based on improved thinking, thanks to conversations we've had about inputs vs.
+outputs; queues etc.
+
+This version will try to keep track of what's happening, by using mud output
+as input; in order to determine the outcome of it's input to the mud... 
+
+MAKES SENSE TO ME, even though it may not read that way... 
+
+
+First, organization... shit has been broken up/organized 
+
+I've been collecting triggers to act on, in order to better "see" what 
+the char is doing vs. what bot has asked the char to do.
+
+
+File structure:
+
+act<Filename>.tt ::
+
+	- These files contain actions we'll use to get feedback from the mud
+	I've tried to keep these organized, where the filename does a
+	descent job of identifying what sort of actions are in what files.
+
+	- These files will also contain functions/alias related to the processing of actions in the same category.
+
+
+bot<Filename>.tt ::
+
+	- These files will be related to the bot logic and state information.. they are the "Bot"
+	- These files don't have any "command" specific shit in them... or shouldn't, anyway.
+
+
+do<Filename>.tt ::
+
+	- These files are command specific, they handle the interfacing with  the mud, such as 
+	getting targets (doCombat) and walking, etc.
+
+chk<Filename>.tt ::  
+
+	- There will likely only be one of these (chkStates.tt), but it (they) will handle state checking, etc.
+
+
+
+--------------------------
+
+File List:
+
+--------------------------
+
+
+Actions ::
+
+
+actCombat.tt: 
+
+	- Contains combat related actions (R.I.P, fight pulse on hits, etc.)
+
+
+actInform.tt
+
+	- Contains actions that will deal out general information to the bot (room changes, time of day, etc.)
+
+actMisc.tt
+
+	- Contains general/misc actions
+
+actStates.tt
+
+	- Contains all actions/functions related to setting/unsetting states (iswalk, isrest, issleep, ismount etc.)
+
+
+Bot ::
+
+
+botBrain.tt
+
+	- Contains the main bot logic... get a command from the queue, check if I can do
+	it, execute and wait for feedback from the mud... repeat.
+
+
+botConfig.tt
+
+	- Contains variables/alias/functions related to configuration of the bot... ie. setting modes, 
+	setting equipment/food/drink as well as variables that can/should be tweaked. 
+
+	- this has a save function, so the user can save config info to load next time... thx #class
+
+
+botStates.tt
+
+	- Contains all variables used to store/check states (isrest, issleep, etc.)
+
+
+
+
+Commands ::
+
+
+doStack.tt
+
+	- This contains the preliminary logic for setting up the queue, and executing
+	commands from it, by popping them off etc. 
+
+	- Also contains logic to insert/add to the list
+
+	- List itself consists of two indexes, one for main commands (walk/fight/etc.) and one for a combat queue 
+	(kick/bash/whatever)
+
+
+doMove.tt
+
+	- This will contain the logic to walk... pretty easy
+
+doCombat.tt
+
+	- This will contian the logic to fight/setup a hitlist/sort through hitlists, etc.
+
+
+
+
+
+
+
+Zones directory ::
+
+This dir will hold all zone info, maps, mob triggers, zone specific shit.
+
+
+

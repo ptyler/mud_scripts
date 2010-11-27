@@ -1,0 +1,25 @@
+Quick and dirty:
+
+- Setup the botBrain.tt to do some simple checking/walking/confirming/repeat
+
+- Add doCombat to work with the queue, using actions for fight feedback and
+list building
+
+- Add more complete logic for resting, once the above are done
+
+
+
+- Move on to more advanced/detailed stuff
+
+	- Map navigation
+	- Detailed combat logic, dealing with assister/assistee etc.
+	- Dealing with coins/items
+	- Equiment
+	- Recalling/fleeing in combat danger situations
+	- Detecting players/assassination attempts
+	- Notifications on user interaction required (tells etc.)
+	- Lots and lots... no limits really
+
+
+
+

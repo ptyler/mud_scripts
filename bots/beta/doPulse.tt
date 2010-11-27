@@ -1,0 +1,76 @@
+#class {doPulse} kill
+#class {doPulse} open
+
+
+#var botrunning {0}  /* check var for running/stopped pulse */
+
+/*
+ * trigger for pulse, what to check/do
+ *********************************************************/
+
+#action {***PULSE***} {
+	
+	#if {$botrunning} {
+
+		#line {gag};
+		#if {$class_doCombat_loaded} {doCombat};
+		#if {$class_doMove_loaded} {doMove};
+		#if {$class_doEatDrink_loaded} {doEatDrink}
+
+	};#else {
+
+		#bell;
+		#showme {** doPulse:: WARNING:: GOT PULSE: BOTRUNNING VAR NOT SET}
+
+	}
+}
+
+
+
+/*
+ *  doPulse function
+ *
+ *  This starts the pulse, args are delay in seconds: doPulse <seconds>
+ *
+ ************************************************************************************/
+
+
+#alias doPulse {
+	
+	#if {$botrunning} {
+
+		#bell;
+		#showme {** doPulse:: Bot already running: nothing to stop}
+
+	};#else {
+
+		#ticker {pulse} {
+			#showme {***PULSE***}
+        	}{%1};
+
+		#var {botrunning} {1}
+	}
+
+}
+
+
+
+/*
+ * doStopPulse function: stop the pulse, no args: doStopPulse
+ *
+ ************************************************************************************/
+
+#alias doStopPulse {
+
+	#if {$botrunning} {
+		#untick {pulse};
+		#var {botrunning} {0}
+	};#else {
+		#bell;
+		#showme {** doPulse:: Bot not running: nothing to stop};	
+	}
+}
+
+
+#var class_doPulse_loaded {1}
+#class {doPulse} close

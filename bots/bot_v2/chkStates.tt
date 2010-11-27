@@ -1,0 +1,33 @@
+#class {chkStates} kill
+#class {chkStates} open
+
+#function {chkStates} {
+
+	#var results {0};
+
+	#switch {"%1"} {
+		#case {"combat"} {
+		
+			if {isrest|issit|issleep|isfight} {
+
+				#return {0}
+
+			};#else {
+				
+				#return {1}				
+			}
+
+		};
+		#case {"walk"} {
+		
+				
+		
+		}
+
+
+	}
+
+
+}
+
+#class {chkStates} close
