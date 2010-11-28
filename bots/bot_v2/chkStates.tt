@@ -3,18 +3,19 @@
 
 #function {chkStates} {
 
-	#var results {0};
 
 	#switch {"%1"} {
 		#case {"doCombat"} {
 
 			#if {$isrest | $issit | $issleep | $isfight} {
 
-				#return 0
+				#var state_check 0;
+				#return #nop
 
 			};#else {
 
-				#return 1				
+				#var state_check 1;
+				#return #nop			
 			}
 
 		};
@@ -22,11 +23,13 @@
 
 			#if {$isrest | $issit | $issleep | $isfight} {
 
-				#return 0
+				#var state_check 0;
+				#return #nop
 
 			};#else {
 
-				#return 1
+				#var state_check 1;
+				#return #nop
 			}
 		};
 		#default {

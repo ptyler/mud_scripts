@@ -25,7 +25,7 @@
 		#switch {"$nextCmd"} {
 			#case {"doMove"} {
 				
-				#var {state_check} {@chkStates{doMove}};
+				@chkStates{doMove};
 				
 				#if {$state_check} {
 			
