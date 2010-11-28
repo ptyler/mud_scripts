@@ -14,7 +14,7 @@
 	
 	#if {$botrunning} {
 
-		@botBrain{}
+		botBrain()
 
 	};#else {
 

@@ -12,7 +12,7 @@
  *************************************************************/
 
 
-#function botBrain {
+#alias botBrain() {
 
 	#if {$isfight | $waiting_lastCmd} {
 
@@ -25,7 +25,7 @@
 		#switch {"$nextCmd"} {
 			#case {"doMove"} {
 				
-				@chkStates{doMove};
+				#var state_check {@chkStates{doMove}};
 				
 				#if {$state_check} {
 			

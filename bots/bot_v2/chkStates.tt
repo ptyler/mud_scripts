@@ -9,13 +9,11 @@
 
 			#if {$isrest | $issit | $issleep | $isfight} {
 
-				#var state_check 0;
-				#return #nop
+				#return 0
 
 			};#else {
 
-				#var state_check 1;
-				#return #nop			
+				#return 1
 			}
 
 		};
@@ -23,13 +21,11 @@
 
 			#if {$isrest | $issit | $issleep | $isfight} {
 
-				#var state_check 0;
-				#return #nop
+				#return 0
 
 			};#else {
 
-				#var state_check 1;
-				#return #nop
+				#return 1
 			}
 		};
 		#default {
