@@ -1,0 +1,109 @@
+#class {doPulse} kill
+#class {doPulse} open
+
+
+#var botrunning {0}  /* check var for running/stopped pulse */
+
+/*
+ * trigger for pulse, what to check/do
+ *********************************************************/
+
+#action {***PULSE***} {
+	
+	#line {gag};
+	
+	#if {$botrunning} {
+
+		@botBrain{}
+
+	};#else {
+
+		#bell;
+		#showme {** doPulse:: WARNING:: GOT PULSE: BOTRUNNING VAR NOT SET}
+
+	}
+}
+
+
+
+/*
+ *  doPulse
+ *
+ *  This starts the pulse, args are delay in seconds: doPulse <seconds>
+ ************************************************************************************/
+
+
+#alias doPulse {
+	
+	#if {$botrunning} {
+
+		#bell;
+		#showme {** doPulse:: Bot already running: nothing to start}
+
+	};#else {
+
+		#ticker {pulse} {
+			#showme {***PULSE***}
+        	}{%1};
+
+		#var {botrunning} {1}
+	}
+
+}
+
+
+
+/*
+ * doStopPulse
+ ************************************************************************************/
+
+#alias doStopPulse {
+
+	#if {$botrunning} {
+		#untick {pulse};
+		#var {botrunning} {0}
+	};#else {
+		#bell;
+		#showme {** doPulse:: Bot not running: nothing to stop};	
+	}
+}
+
+
+
+
+
+/* Alias to stop/start
+ ***************************************************/
+
+#alias {bot.start} {
+
+	#if {$class_doPulse_loaded} {
+
+		doPulse 2
+
+	};#else {
+
+		#bell;
+		#showme {** doPulse:: -- START WHAT??? LOAD BOT OR doPulse.tt FIRST!!}
+	}
+}
+
+#alias {bot.stop} {
+
+	#if {$botrunning} {
+
+		doStopPulse
+
+	};#else {
+
+		#bell;
+		#showme {** doPulse:: -- PULSE NOT RUNNING: nothing to stop}
+        }
+}
+
+
+
+
+
+#var class_doPulse_loaded {1}
+#class {doPulse} close

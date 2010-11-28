@@ -17,6 +17,8 @@
 
 #var currenthp {0}
 #var currentmp {0}
+#var resttohp {0}
+#var resttomp {0}
 
 #var maxhp {0}				/* Total HP */
 #var minhp {0}				/* Min HP before rest attempt */

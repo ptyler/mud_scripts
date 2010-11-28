@@ -1,9 +1,0 @@
-#alias dotest {
-
-	if {isrest|issit} {
-		
-		#showme {something was set!!!}
-
-	}
-
-}

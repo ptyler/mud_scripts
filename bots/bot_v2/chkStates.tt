@@ -6,28 +6,38 @@
 	#var results {0};
 
 	#switch {"%1"} {
-		#case {"combat"} {
+		#case {"doCombat"} {
 		
-			if {isrest|issit|issleep|isfight} {
+			#if {$isrest|$issit|$issleep|$isfight} {
 
-				#return {0}
+				#return 0
 
 			};#else {
 				
-				#return {1}				
+				#return 1				
 			}
 
 		};
-		#case {"walk"} {
+		#case {"doMove"} {
 		
-				
+			#if {$isrest|$issit|$issleep|$isfight} {
+			
+				#return 0
 		
+			};#else {
+			
+				#return 1
+			}
+		};
+		#default {
+			#showme {** chkStates:: Nothing to do - check arguments};
+			#return #nop
 		}
 
 
 	}
 
-
+	
 }
 
 #class {chkStates} close

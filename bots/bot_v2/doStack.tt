@@ -20,7 +20,7 @@
 
 		#list {botBrainQueue[$stack_name]} {get} {1} {next_command};
 			
-		#send {$next_command};
+		$next_command;
 
 		#var last_command {$botBrainQueue[$stack_name][1]};
 		#list {botBrainQueue[$stack_name]} {delete} {1}
@@ -36,7 +36,7 @@
 #alias doStack_botInit {
 	
 	#list {botBrainQueue} {clear};
-	#list {botBrainQueue[main]} {create} {doCombat} {doWalk};
+	#list {botBrainQueue[main]} {create} {doMove};
 	#list {botBrainQueue[combat]} {create}
 }
 

@@ -1,0 +1,68 @@
+#class {botBrain} {kill}
+#class {botBrain} {open}
+
+
+#var waiting_lastCmd {0}
+#var lastCmd {}
+#var nextCmd {}
+#var state_check 0
+
+
+/* botBrain checks/and pops commands, called by doPulse.tt
+ *************************************************************/
+
+
+#function botBrain {
+
+	#if {$isfight | $waiting_lastCmd} {
+
+		#return #nop
+
+	};#else {
+		
+		#var nextCmd $botBrainQueue[main][1];
+
+		#switch {"$nextCmd"} {
+			#case {"doMove"} {
+				
+				#var {state_check} {@chkStates{doMove}};
+				
+				#if {$state_check} {
+			
+					@doStack_Insert{add;main;doMove};
+					
+					#var {lastCmd} {doMove};
+					@doStack_nextCommand{main};
+					
+					#var waiting_lastCmd {1};
+					#var state_check {0};
+					#var nextCmd {};
+		
+					#return #nop
+
+				}	
+
+			};
+			#case {"doCombat"} {
+				#return #nop
+			};
+			#default {
+			
+				#return #nop
+			}
+
+
+		}	
+	}	
+
+
+
+}
+
+
+
+
+
+
+
+#class {botBrain} {close}
