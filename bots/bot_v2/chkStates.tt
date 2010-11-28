@@ -7,25 +7,25 @@
 
 	#switch {"%1"} {
 		#case {"doCombat"} {
-		
-			#if {$isrest|$issit|$issleep|$isfight} {
+
+			#if {$isrest | $issit | $issleep | $isfight} {
 
 				#return 0
 
 			};#else {
-				
+
 				#return 1				
 			}
 
 		};
 		#case {"doMove"} {
-		
-			#if {$isrest|$issit|$issleep|$isfight} {
-			
+
+			#if {$isrest | $issit | $issleep | $isfight} {
+
 				#return 0
-		
+
 			};#else {
-			
+
 				#return 1
 			}
 		};
