@@ -12,8 +12,7 @@
   #if { $hp > $resthp && !$inbattle && !$resting && !$sleeping }
   {
     #var {inbattle} {1};
-    hide;
-    backstab %1
+    ki %1
   }
 }
 
@@ -27,7 +26,6 @@
   };
   #elseif { !$resting && !$inbattle }
   {
-    sneak;
     #path walk forward
   };
 }
