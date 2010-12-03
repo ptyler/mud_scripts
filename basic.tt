@@ -155,8 +155,31 @@
 #sub {^You feel especially skillful today.} {<049>-:><039>skill up!<049><:- <039>You feel especially skillful today.<099>}
 
 
-#alias {setfood}  {#var food {%1}}
-#alias {setbag}   {#var container {%1}}
+#log append mud.log
+#alias {setfood}
+{
+  #if { "%1" != "" }
+  {
+    #var food {%1};
+    system_message {setfood} {set to} {$food}
+  };
+  #else
+  {
+    system_message {setfood} {current food is} {$food}
+  };
+}
+#alias {setbag}
+{
+  #if { "%1" != "" }
+  {
+    #var container {%1};
+    system_message {setbag} {set to} {$container}
+  };
+  #else
+  {
+    system_message {setbag} {current bag is} {$container}
+  }
+}
 #alias {rl}       {#read basic.tt}
 #alias {autoloot} {#var autoloot {%1}; #showme {autoloot set to: %1}}
 #alias {load.mapping}   {#read mapping.tt}
