@@ -1,0 +1,18 @@
+#class {balifor_brogs} kill
+#class {balifor_brogs} open
+
+/* put scripts here */
+
+
+#act {One of the Brog females peers at you as she walks by.} {fight brog}
+#act {A Brog male stands here, eyeing you.} {fight brog}
+#act {An alert Brog guard is here, watching you pass by.} {fight brog}
+#act {In the back of the room, near the cage, stands a skeevy Brog dealer.} {fight brog}
+#act {A sad-looking Brog is here trying to get food for his family.} {fight brog}
+#act {Running right by you, a small Brog boy chases a small bug.} {fight brog}
+#act {A young brog female prepares some food for her mate.} {fight brog}
+#act {The young Brog male of the house eagerly awaits his meal here.} {fight brog}
+#act {A small Brog girl prances around trying to grab her parent's attention.} {fight brog}
+
+
+#class {balifor_brogs} close

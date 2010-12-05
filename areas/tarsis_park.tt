@@ -12,6 +12,11 @@
 #act {^A little white mouse scurries along the path.} {fight mouse}
 #act {^A small puppy is here wandering around the park.} {fight puppy}
 
+#action {^A large brown dog is wandering around with his tongue hanging out.} {fight dog}
+#action {^A young deer with a fluffy white tail bounds its way around the park.} {fight deer}
+#action {^Some bushes are here, trimmed to the shape of a butterfly.} {fight butterfly}
+#action {^Some bushes are here, trimmed to the shape of a swan.} {fight swan}
+
 #var {tarsis_park} {s;e;s;e;w;s;e;e;n;s;s;w;e;s;e;n;s;w;s;s;e;w;n;w;s;w;s;e;s;e;w;s;w;s;n;n;w;s;n;n;n;w;s;s;n;n;w;s;n;e;n;e;n;e;w;n;w;w;s;s;n;w;n;w;n;e;n;e;s;e;n;s;w;n;w;n;e;w;w;n;w;e;s;w;s;e;w;s;e;s;e;s;w;s;e;s;e;w;s;e;s;n;w;n;n;w;n;w;w;n;e}
 
 #var {tarsis_park_rev} {e;e;s;e;s;s;e;s;n;w;n;e;w;n;w;n;e;n;w;n;w;n;e;w;n;e;n;w;e;s;e;e;w;s;e;s;e;n;s;w;n;w;s;w;s;e;s;e;s;n;n;e;e;s;e;w;s;w;s;w;s;n;e;s;s;n;n;e;s;s;s;n;e;s;s;n;e;n;e;w;n;w;n;e;n;e;s;e;w;n;n;e;n;s;w;n;w;e;n;n;s;w;w;n;e;w;n;w;n}

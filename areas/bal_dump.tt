@@ -1,0 +1,10 @@
+#class {bal_dump} kill
+#class {bal_dump} open
+
+#act {A gully dwarf walks around here picking up garbage.} {fight dwarf}
+#act {A gully dwarf searches through the garbage in search for a morsel of food.} {fight dwarf}
+#act {A rat scampers around the dump here.} {fight rat}
+#act {A gully dwarf strolls casually through the filth.} {fight dwarf}
+#act {A young looking gully dwarf child wanders aimlessly here.} {fight dwarf}
+
+#class {bal_dump} close
