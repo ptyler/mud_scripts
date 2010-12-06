@@ -69,7 +69,12 @@
 {
   #math sqc {&spellqueue[]};
   #math aqc {&abilityqueue[]};
-  #if { $sqc > 0 && $autocasting && !$resting && !$sleeping && !$mounted }
+  #if { $sqc > 0 
+        && $autocasting 
+        && !$resting 
+        && !$sleeping 
+        && !$mounted 
+        && !$sitting }
   {
     system_message {doqueue} {recasting} {$spellqueue[1]};
     cast $spellqueue[1];
