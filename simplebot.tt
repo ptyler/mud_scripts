@@ -1,10 +1,16 @@
 #class {simplebot} kill
 #class {simplebot} open
 
-#act {^%1 attempts to flee.} {#var inbattle 0}
-#act {^They aren't here.}  {#var inbattle 0}
+#act {^%1 attempts to flee.} {ugh}
+#act {^They aren't here.}  {ugh}
 #act {^#END OF PATH.} {#path load tarsis_park}
-#act {^You couldn't find what you were looking for.} {#var inbattle 0}
+#act {^You couldn't find what you were looking for.} {ugh}
+
+#alias {ugh}
+{
+  #var inbattle 0;
+  #var wasjustinbattle 1
+}
 
 #alias {fight}
 {
