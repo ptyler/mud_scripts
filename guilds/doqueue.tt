@@ -1,0 +1,91 @@
+#class {doqueue} kill
+#class {doqueue} open
+
+
+
+
+#var {spellqueue}   {}
+#var {abilityqueue} {}
+#var {sqc} {0}          /* count of spells in the queue    */
+#var {aqc} {0}          /* count of abilities in the queue */
+#var {autocasting} {1}
+
+
+/*
+ * This is the spell (and ability?) queue processor.  Spells and abilities
+ * can be put here to be refreshed.  At the moment this isn't the place
+ * to put things like bash and strike, that will be later. ;)
+ *****************************************************************************/
+
+
+
+/* 
+ * this toggles auto casting on and off 
+ *****************************************************************************/
+
+#alias {autocast}
+{
+  #if { $autocasting }
+  {
+    #var autocasting 0;
+    system_message {autocast} {set to} {disabled}
+  };
+  #else
+  {
+    #var autocasting 1;
+    system_message {autocast} {set to} {enabled}
+  }
+}
+
+/* 
+ * queue_spell/queue_ability just "read" nicer than the #list stuff throughout
+ * the rest of the code.
+ *****************************************************************************/
+
+#alias {queue_spell %1}
+{
+  #list spellqueue add {%1}
+}
+
+#alias {queue_ability %1}
+{
+  #list abilityqueue add {%1}
+}
+
+
+/* 
+ * This is really the meat of it.  If there is a spell in the spellqueue or 
+ * an ability in the ability queue.  Do it, but only do one of them this
+ * iteration of the loop.
+ *
+ * yes, spells take priority, so far... maybe there's a way to make a sort
+ * of priority queue.  If so, I'll change it.
+ *
+ * Maybe just have 3 queues and the represent priority itself, each queue
+ * just having more priority than the previous.  Simulating 'priority'
+ *****************************************************************************/
+
+#tick {recast}
+{
+  #math sqc {&spellqueue[]};
+  #math aqc {&abilityqueue[]};
+  #if { $sqc > 0 && $autocasting && !$resting && !$sleeping && !$mounted }
+  {
+    system_message {doqueue} {recasting} {$spellqueue[1]};
+    cast $spellqueue[1];
+    #list spellqueue del 1
+  };
+  #elseif { $aqc > 0 && $autocasting && !$resting && !$sleeping && !$mounted }
+  {
+    system_message {doqueue} {performing} {$abilityqueue[1]};
+    $abilityqueue[1];
+    #list abilityqueue del 1
+  }
+
+} {3.3}
+
+/* load message */
+
+#delay 1 system_message {LOADED} {doqueue module} {Type doqueue.help for help}
+
+#class {doqueue} close
