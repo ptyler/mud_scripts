@@ -8,6 +8,12 @@
 #var {mapping} {0}
 #var {mapname} {}
 
+#act {^You can't do that while fighting.} {#map undo}
+#act {^You are too exhausted.} {#map undo}
+#act {^The door seems to be closed.} {#map undo}
+#act {^Come on! I'm relaxing!} {#map undo}
+
+
 #action {^Alas, you cannot go that way...}
 {
   #if {$mapping==1}
