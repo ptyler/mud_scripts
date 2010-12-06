@@ -18,8 +18,9 @@
 #alias {curse} {cast 'curse'}
 #alias {rstr} {cast 'restore strength'}
 #alias {blind} {c 'bli'}
-
+#alias {sil} {c 'sil'}
 #act {^You are thirsty.} {c 'cre wa'}
+
 #act {^Your studies complete, you close %1} { synctick }
 
 #var {needblessing} {0}
