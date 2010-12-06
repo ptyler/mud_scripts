@@ -28,6 +28,31 @@
   queue_spell {'bless' me};
 }
 
+/* 
+ * eating/drinking handled as casts.
+ *****************************************************************************/
+#var {iamthirsty} {0}
+#var {iamhungry}  {0}
+
+#unact {^You are hungry.}
+#act {^You are thirsty.}
+{
+  #if {!$iamthirsty}
+  {
+    #var iamthirsty 1;
+    queue_spell {'summon elixir'};
+    queue_ability {drink elixir}
+  }
+}
+
+#act {^You do not feel thirsty.}
+{
+  #var iamthirsty 0;
+  #var iamhungry  0
+}
+
+/*****************************************************************************/
+
 /* spell/ability processing handled in one place */
 
 #read guilds/doqueue.tt
