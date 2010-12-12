@@ -11,7 +11,10 @@
  * have to be repeated in every guild that would need it.
  *****************************************************************************/
 
-#act {^The gods will grant you audience through prayer again,%1} { queue_ability {beseech paladine}; }
+#act {^The gods will grant you audience through prayer again,%1} 
+{ 
+  queue_ability {beseech paladine}; 
+}
 
 #act {^The radiance surrounding you fades away.} 
 { 
@@ -28,8 +31,18 @@
   queue_spell {'bless' me};
 }
 
+#act {^Your eyes sting for a moment.}
+{
+  queue_spell {'holy vision'}
+}
+
 /* 
- * eating/drinking handled as casts.
+ * eating/drinking handled as casts. 
+ *
+ * - since you continue to receive hungry/thirsty, a simple action would keep
+ *   adding spells to the queue until you're in a state to perform them. 
+ *
+ * - still dancing around the state && act vs. act... ;)
  *****************************************************************************/
 #var {iamthirsty} {0}
 #var {iamhungry}  {0}
