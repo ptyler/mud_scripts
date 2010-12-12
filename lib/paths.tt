@@ -1,0 +1,8 @@
+#class {paths} kill
+#class {paths} open
+
+
+#var {tar2bal} {e;e;e;e;e;e;e;s;d;e;e;e;u;e;e;e;e;e;e;e;n;e;e;n;n;e;u;u;n;n;n;n;e;n;n;n;e;e;e;e;s;s;s;s;s;s;s}
+#var {bal2tar} {n;n;n;n;n;n;n;w;w;w;w;s;s;s;w;s;s;s;s;d;d;w;s;s;w;w;s;w;w;w;w;w;w;w;d;w;w;w;u;n;w;w;w;w;w;w;w}
+
+#class {paths} close
