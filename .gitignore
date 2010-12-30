@@ -14,3 +14,5 @@ logs/*log
 run.tt
 t.tt
 *.core
+beat.tt
+test.tt
