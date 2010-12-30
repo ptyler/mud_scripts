@@ -1,0 +1,32 @@
+#class {mage} {kill}
+#class {mage} {open}
+
+/*
+ * aliases and such for mages
+ ********************************************************************************/
+
+#act {^Your studies complete, you close %1} { synctick }
+#act {^The lunar glimmer fades from your eye.} { gift }
+
+#alias cdm {cast 'detect magic'}
+#alias csg {cast 'shocking grasp'}
+#alias clb {cast 'lightning bolt'}
+#alias cmm {cast 'magic missile'}
+#alias csl {cast 'sleep'}
+#alias ctel {cast 'teleport'}
+#alias cdd {cast 'dim door'}
+#alias cdd {cast 'dim door'}
+#alias cgow {cast 'g o w'}
+#alias cstr {cast 'stren'}
+#alias ccs {cast 'cold snap'}
+#alias cfb {cast 'fireball'}
+#alias boost {cast 'boost'}
+#alias douse {cast 'douse'}
+#alias cma {cast 'ment acu'}
+
+
+#alias rlm {#read guilds/mage.tt}
+
+
+#delay 1 system_message {LOADED} {Mage module} {Type mage.help for help}
+#class {mage} {close}
