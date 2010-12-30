@@ -11,7 +11,10 @@
 #act {^You can't do that while fighting.} {#map undo}
 #act {^You are too exhausted.} {#map undo}
 #act {^The door seems to be closed.} {#map undo}
-#act {^Come on! I'm relaxing!} {#map undo}
+#act {^The guild guard blocks your movement in that direction.} {#map undo}
+/* #act {^Come on! I'm relaxing!} {#map undo} */
+
+
 
 
 #action {^Alas, you cannot go that way...}
