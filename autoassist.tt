@@ -7,7 +7,7 @@
 #alias {autoassist} {#var autoassist {%1}}
 #showme {<039>You must run: setleader <leader name>}
 
-#act {^$leader {misses|bludgeons|slashes|pierces|bruise|barely|hit} %1}
+#act {^$leader {misses|bludgeons|whips|cleaves|slashes|pierces|bruise|barely|hit} %1}
 {
   #if {$inbattle==0 && $autoassist == 1}
   {
