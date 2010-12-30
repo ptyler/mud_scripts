@@ -19,7 +19,6 @@
 #alias {rstr} {cast 'restore strength'}
 #alias {blind} {c 'bli'}
 #alias {sil} {c 'sil'}
-#act {^You are thirsty.} {c 'cre wa'}
 
 #act {^Your studies complete, you close %1} { synctick }
 
@@ -53,5 +52,7 @@
 {
   do_buffs;
 } {60}
+
+#delay 1 system_message {LOADED} {Cleric module} {Type cleric.help for help}
 
 #class {cleric} {close}
