@@ -1,0 +1,19 @@
+#class {druid} {kill}
+#class {druid} {open}
+
+/*
+ * aliases and such for druids
+ ********************************************************************************/
+
+#act {^Your studies complete, you close %1} { synctick }
+
+#alias {cts} {cast 'thorn spray'}
+#alias {cbh} {cast 'burning hands'}
+#alias {cli} {cast 'cure light'}
+
+
+#alias rld {#read guilds/druid.tt}
+
+
+#delay 1 system_message {LOADED} {Druid module} {Type druid.help for help}
+#class {druid} {close}

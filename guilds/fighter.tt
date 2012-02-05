@@ -1,0 +1,64 @@
+#class {fighter} {kill}
+#class {fighter} {open}
+
+/*
+ * aliases and such for fighters
+ ********************************************************************************/
+
+/* Your punch hand is ready to lay into someone again. */
+
+#var {practicing} {0}
+
+#action {^You try to bash %1, but you miss and tumble forward onto your face.} {stand; #var practicing 0}
+
+#action {^You couldn't find what you were looking for.} {#var practicing 0}
+
+#action {^You try to punch %1 moves out of the way.} {#var practicing 0}
+
+#action {^You try to sweep %1 legs, but are unable to.} {#var practicing 0}
+#action {^%1 dodges away and your kick misses by a mile.} {#var practicing 0}
+#action {^Your vicious kick leaves your boots covered with blood and gore.} {#var practicing 0}
+#action {^You need to kick someone.} {#var practicing 0}
+
+#sub    {^You deliver a snap kick %1}  {  }
+#action {^You deliver a snap kick and hit %1 in the chest.} 
+{ 
+  #var practicing 0;
+}
+
+
+
+#action {^You crash into %1 in a bone crunching bash, sending him sprawling to the ground.}
+{
+  #var practicing 0;
+  system_message {BASHED!!} {wooo} {hooo}
+}
+
+
+#var  {skill} {{1}{bash}{2}{kick}{3}{punch}}
+#list {skill} {size} {skill_size}
+#var {i} {1}
+#tick {practice_skills}
+{
+  #if { $inbattle && !$practicing }
+  {
+    #var practicing 1;
+    #showme {!!!=>>${skill[$i]}ing};
+    $skill[$i];
+    #if { $i < 3 } 
+    {
+      #math {i} {$i + 1}
+    };
+    #else 
+    { 
+      #var {i} 1
+    };
+  }
+}{0.5}
+
+
+#alias rlf {#read guilds/fighter.tt}
+
+
+#delay 1 system_message {LOADED} {Fighter module} {Type fighter.help for help}
+#class {fighter} {close}
