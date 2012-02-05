@@ -1,12 +1,12 @@
-#class {tol_evil} kill
-#class {tol_evil} open
+#class {toi_evil} kill
+#class {toi_evil} open
 
 #act {^A goblin slinks about here.} {fight goblin}
 #act {^A sinister-looking hobgoblin glares about him.} {fight hobgoblin} 
 #act {^A hyena-like humanoid patrols about here.} {fight gnoll}
-#act {^A giant rat crawls about here.} {fight rat}
-#act {^A kobold rummages about here.} {fight kobold}
 #act {^Obviously up to no good, a gnoll is here.} {fight gnoll}
+#act {^A kobold rummages about here.} {fight kobold}
+#act {^A giant rat crawls about here.} {fight rat}
 #act {^Hungry for blood, a giant tick searches for prey} {fight tick}
 
-#class {tol_evil} close
+#class {toi_evil} close
