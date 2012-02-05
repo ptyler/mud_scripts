@@ -196,11 +196,13 @@
     system_message {setbag} {current bag is} {$container}
   }
 }
-#alias {rl}       {#read basic.tt}
-#alias {autoloot} {#var autoloot {%1}; #showme {autoloot set to: %1}}
-#alias {load.mapping}   {#read mapping.tt}
-#alias {load.cleric}    {#read guilds/cleric.tt}
-#alias {load.paladin}    {#read guilds/paladin.tt}
+#alias {rlb}          {#read basic.tt}
+#alias {autoloot}     {#var autoloot {%1}; #showme {autoloot set to: %1}}
+#alias {load.mapping} {#read mapping.tt}
+#alias {load.cleric}  {#read guilds/cleric.tt}
+#alias {load.paladin} {#read guilds/paladin.tt}
+#alias {load.druid}   {#read guilds/druid.tt}
+#alias {load.mage}    {#read guilds/mage.tt}
 
 #alias {basic.help}
 {
@@ -224,9 +226,19 @@
   #showme <049>-<039>:<049>><069>%1<049><<039>:<049>-<149><069> %2: %3<099>
 }
 
-/* need at least 1 score output to populate variables */
+/*
+ * This just gives a different skill up message, colorized, etc.
+ *
+ * %1 = skill name: kick, punch, etc...
+ * %2 => original message
+ *****************************************************************************/
+#alias {succeeded_skill %1 %2}
+{
+  #showme <eeb>-:><dca>%1<eeb><:- %2
+}
+
 score
-#delay 1 system_message {LOADED} {Basic module} {Type basic.help for help}
+#delay {0.1} system_message {LOADED} {Basic module} {Type basic.help for help}
 
 #class {basic} {close}
 

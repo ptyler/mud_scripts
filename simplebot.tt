@@ -18,7 +18,8 @@
   #if { $hp > $resthp && !$inbattle && !$resting && !$sleeping }
   {
     #var {inbattle} {1};
-    ki %1
+    hide;sneak;
+    backstab %1
   }
 }
 
